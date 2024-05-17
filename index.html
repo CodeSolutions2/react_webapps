@@ -4,6 +4,8 @@
 <body>
 
 <div id="JSX_root"></div>
+<div id="JavaScript_root"></div>
+     
 <button id="react_basics0" onclick="react_basics0()">React.js in JavaScript</button>
 <br>
 <button id="react_basics1" onclick="react_basics1()">JavaScript in the style of React.js</button>
@@ -31,9 +33,9 @@ async function react_basics1(){
      const p = document.createElement("p");
      p.textContent = 'Paragraph Text';
      
-     const container2 = document.getElementById('JavaScript_root');
-     container2.append(h1)
-     container2.append(p);
+     const container = document.getElementById('JavaScript_root');
+     container.appendChild(h1)
+     container.appendChild(p);
 }
 
 </script>
