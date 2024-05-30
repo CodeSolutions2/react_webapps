@@ -46,48 +46,48 @@ async function react_basics0() {
      // So the useEffect runs when the variable htmlString changes
    
      // Idea 0
-     const [htmlString, sethtmlString] = React.useState(`<nav>
-        <h1>Exploring navbar using React in JavaScript</h1>
-          <ul><li>Item 0</li>
-              <li>Item 1</li>
-    </ul></nav>`);
+     // const [htmlString, sethtmlString] = React.useState(`<nav>
+    //     <h1>Exploring navbar using React in JavaScript</h1>
+    //       <ul><li>Item 0</li>
+   //            <li>Item 1</li>
+    // </ul></nav>`);
 
      // Idea 1
-     //  const htmlString = `<nav>
-    //      <h1>Exploring navbar using React in JavaScript</h1>
-     //       <ul><li>Item 0</li>
-    //            <li>Item 1</li>
-    //  </ul></nav>`;
-     // const containerRef = useRef();
+     const htmlString = `<nav>
+         <h1>Exploring navbar using React in JavaScript</h1>
+       <ul><li>Item 0</li>
+               <li>Item 1</li>
+     </ul></nav>`;
+     const containerRef = useRef();
      
      React.useEffect(() => {
           
            const fragment = document.createRange().createContextualFragment(htmlString);
 
           // Idea 0
-          let nodes;
+          // let nodes;
           // I guess it loops over each of the html elements in htmlString and assigns each one to a node
-          if (nodes.current && fragment) {
-               nodes = [...fragment.children];
-               console.log('nodes0: ', nodes);
-               nodes.current.appendChild(fragment);
-               console.log('nodes1: ', nodes);
-          }
+          // if (nodes.current && fragment) {
+          //      nodes = [...fragment.children];
+           //     console.log('nodes0: ', nodes);
+         //       nodes.current.appendChild(fragment);
+           //     console.log('nodes1: ', nodes);
+         //  }
           // Then remove the node from the parentElement
           // nodes.forEach(function(node, ind) {
          //       node.parentElement.removeChild(node);
            //     })
 
           // Idea 1
-          // containerRef.current.appendChild(fragment);
+          containerRef.current.appendChild(fragment);
           
      }, [htmlString]);
 
      // Idea 0
-     const element = React.createElement('div', null, htmlString);
+    //   const element = React.createElement('div', null, htmlString);
      
      // Idea 1
-     // const element = React.createElement('div', null, ref={containerRef});
+     const element = React.createElement('div', null, containerRef};
 
      
     // -----------------------------------------
