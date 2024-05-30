@@ -72,7 +72,7 @@ async function react_basics0() {
                nodes.current.appendChild(fragment);
           }
           // Then remove the node from the parentElement
-          return () => { nodes.forEach((node, ind) => node.parentElement.removeChild(node);) };
+          return () => { nodes.forEach(node => node.parentElement.removeChild(node);) };
 
           // Idea 1
           // containerRef.current.appendChild(fragment);
