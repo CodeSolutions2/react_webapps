@@ -69,10 +69,14 @@ async function react_basics0() {
           // I guess it loops over each of the html elements in htmlString and assigns each one to a node
           if (nodes.current && fragment) {
                nodes = [...fragment.children];
+               console.log('nodes0: ', nodes);
                nodes.current.appendChild(fragment);
+               console.log('nodes1: ', nodes);
           }
           // Then remove the node from the parentElement
-          return () => { nodes.forEach(node => node.parentElement.removeChild(node);) };
+          // nodes.forEach(function(node, ind) {
+         //       node.parentElement.removeChild(node);
+           //     })
 
           // Idea 1
           // containerRef.current.appendChild(fragment);
