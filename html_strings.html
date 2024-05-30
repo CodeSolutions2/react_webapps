@@ -34,19 +34,53 @@ async function react_basics0() {
      // OR
 
       // Incorrect Uncaught SyntaxError: expected property name, got '{'
+     //  const htmlString = `<nav>
+    //      <h1>Exploring navbar using React in JavaScript</h1>
+     //       <ul><li>Item 0</li>
+    //            <li>Item 1</li>
+    //  </ul></nav>`;
+     // const element = React.createElement('div', null, dangerouslySetInnerHTML={{ __html: htmlString }});
+
+     // OR
+     
+     // So the useEffect runs when the variable htmlString changes
      const htmlString = `<nav>
         <h1>Exploring navbar using React in JavaScript</h1>
           <ul><li>Item 0</li>
               <li>Item 1</li>
     </ul></nav>`;
-     const element = React.createElement('div', null, dangerouslySetInnerHTML={{ __html: htmlString }});
-
-     // OR
      
-     // So the useEffect runs when the variable htmlString changes
-     // React.useEffect(() => {
-     //      const fragment = document.createRange().createContextualFragment(htmlString);
-     // }, [htmlString])
+     // Idea 0
+     const [htmlString, sethtmlString] = React.useState([]);
+
+     // Idea 1
+     // const containerRef = useRef();
+     
+     React.useEffect(() => {
+          
+           const fragment = document.createRange().createContextualFragment(htmlString);
+
+          // Idea 0
+          let nodes;
+          // I guess it loops over each of the html elements in htmlString and assigns each one to a node
+          if (nodes.current && fragment) {
+               nodes = [...fragment.children];
+               nodes.current.appendChild(fragment);
+          }
+          // Then remove the node from the parentElement
+          return () => { nodes.forEach((node, ind) => node.parentElement.removeChild(node);) };
+
+          // Idea 1
+          // containerRef.current.appendChild(fragment);
+          
+     }, [htmlString]);
+
+     // Idea 0
+     const element = React.createElement('div', null, htmlString);
+     
+     // Idea 1
+     // const element = React.createElement('div', null, ref={containerRef});
+
      
     // -----------------------------------------
   
