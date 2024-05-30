@@ -113,22 +113,22 @@ async function javascript_code(){
     // OR
 
      // Way 1: works
-     const htmlString = `<nav>
-        <h1>Exploring navbar using React in JavaScript</h1>
-          <ul><li>Item 0</li>
-              <li>Item 1</li>
-              </ul></nav>`;
+   //  const htmlString = `<nav>
+  //      <h1>Exploring navbar using React in JavaScript</h1>
+   //       <ul><li>Item 0</li>
+  //            <li>Item 1</li>
+    //          </ul></nav>`;
 
      // -----------------------------------------
 
      // Finally the navbar!
-    const htmlString = `<nav className="navbar navbar-expand-lg navbar-light bg-light">
+    const htmlString0 = `<nav className="navbar navbar-expand-lg navbar-light bg-light">
                              <a className="navbar-brand" href="">Navbar example!</a>
                          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
      <span className="navbar-toggler-icon"></span></button>
   </nav>`;
      
-    var htmlNode = document.createRange().createContextualFragment(htmlString);
+    var htmlNode = document.createRange().createContextualFragment(htmlString0);
     
      const container = document.getElementById('JavaScript_root');
      container.appendChild(htmlNode);
