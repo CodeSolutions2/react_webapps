@@ -44,16 +44,20 @@ async function react_basics0() {
      // OR
      
      // So the useEffect runs when the variable htmlString changes
-     const htmlString = `<nav>
+   
+     // Idea 0
+     const [htmlString, sethtmlString] = React.useState(`<nav>
         <h1>Exploring navbar using React in JavaScript</h1>
           <ul><li>Item 0</li>
               <li>Item 1</li>
-    </ul></nav>`;
-     
-     // Idea 0
-     const [htmlString, sethtmlString] = React.useState([]);
+    </ul></nav>`);
 
      // Idea 1
+     //  const htmlString = `<nav>
+    //      <h1>Exploring navbar using React in JavaScript</h1>
+     //       <ul><li>Item 0</li>
+    //            <li>Item 1</li>
+    //  </ul></nav>`;
      // const containerRef = useRef();
      
      React.useEffect(() => {
