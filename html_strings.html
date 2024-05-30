@@ -44,7 +44,7 @@ async function react_basics0() {
      //      const fragment = document.createRange().createContextualFragment(htmlString);
      // }, [htmlString])
 
-     const element = React.createElement('div', {className: 'div_name'}, dangerouslySetInnerHTML={{ __html: htmlString }});
+     const element = React.createElement('div', 'div_name', dangerouslySetInnerHTML={{ __html: htmlString }});
      
      
      
