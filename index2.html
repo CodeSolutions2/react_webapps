@@ -240,7 +240,7 @@ function get_create_element1(row) {
      
      // return the items between start_root and end_root
      return array1.map((row, i) => { 
-          return React.createElement(`${row[i]}`, {className: `${row[i]}`, key: `${row[i]}_keyName${i}` }, list_of_html_values_short[i]) })
+          return React.createElement(`${row}`, {className: `${row}`, key: `${row}_keyName${i}` }, list_of_html_values_short[i]) })
      
 }
      
