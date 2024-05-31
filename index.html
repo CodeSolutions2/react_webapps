@@ -46,10 +46,10 @@ async function react_table_row() {
 	
 	var array1 = [2, 3, 4, 5, 7, 8];
      
-	const ObjectRow = array1.map((row, ind) => { return React.createElement('td', null, `${row}`); key={ind} })
-	const element = React.createElement('table', null, 
-		React.createElement('tbody', {className: 'tblBody'}, 
-		React.createElement('tr', null, ObjectRow) 
+	const ObjectRow = array1.map((row, ind) => { return React.createElement('td', {key: ind}, `${row}`) })
+	const element = React.createElement('table', {className: 'table', key: table_keyName}, 
+		React.createElement('tbody', {className: 'tbody', key: tbody_keyName}, 
+		React.createElement('tr', {className: 'tr', key: tr_keyName}, ObjectRow) 
 			    ));
 	
 	console.log('element: ', element);
