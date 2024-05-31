@@ -43,8 +43,8 @@ async function react_basics1(){
 
 
 async function react_table_row() {
-     
-     var array1 = [2, 3, 4, 5, 7, 8];
+	
+	var array1 = [2, 3, 4, 5, 7, 8];
      
 	const ObjectRow = array1.map((row, ind) => { return React.createElement('td', null, `${row}`); key={ind} })
 	const element = React.createElement('table', null, 
@@ -57,7 +57,6 @@ async function react_table_row() {
 	const container = document.getElementById('JSX_root');
 	const root = ReactDOM.createRoot(container);
 	root.render(element);
-	
 }
 
 </script>
