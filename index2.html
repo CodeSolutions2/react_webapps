@@ -132,6 +132,9 @@ async function react_basics0() {
      console.log("list_of_html_keys: ", list_of_html_keys);
      console.log("list_of_html_values: ", list_of_html_values);
 
+     // Correct first list_of_html_values value
+     list_of_html_values[0] = "";
+
 
      await get_element();
 
@@ -180,10 +183,9 @@ async function get_element() {
                     // React.createElement('li', {className: 'li'}, 'Item 1'), 
                     // React.createElement('li', {className: 'li'}, 'Item 2'));
      
-     // Correct first list_of_html_values value
-     list_of_html_values[0] = "";
      
-            const element = "";
+     
+            var element = "";
           for (let i=0; i<list_of_html_keys.length-1; i++) {
                           element = element + get_create_element(i);
             }
