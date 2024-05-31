@@ -4,11 +4,8 @@
 <body>
 
 <div id="JSX_root"></div>
-<div id="JavaScript_root"></div>
      
 <button id="react_basics0" onclick="react_basics0()">React.js in JavaScript</button>
-<br>
-<button id="react_basics1" onclick="react_basics1()">JavaScript in the style of React.js</button>
 <br>
 <button id="react_table_row" onclick="react_table_row()">React.js table row</button>
 <br>
@@ -39,20 +36,6 @@ async function react_basics0(){
           React.createElement('p', null, 'Paragraph Text'));
      
      root.render(element);
-}
-
-// ----------------------------------------------------
-
-async function react_basics1(){
-     
-     const h1 = document.createElement("h1");
-     h1.textContent = 'Header Text';
-     const p = document.createElement("p");
-     p.textContent = 'Paragraph Text';
-     
-     const container = document.getElementById('JavaScript_root');
-     container.appendChild(h1)
-     container.appendChild(p);
 }
 
 // ----------------------------------------------------
