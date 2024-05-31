@@ -116,6 +116,7 @@ async function react_basics0() {
      
      // fragment.children[0].children = length 2
      // fragment.children[0].children[0] = <h1>
+     
      // fragment.children[0].children[0].children  = length 0
      // fragment.children[0].children[1] = <ul>
      // fragment.children[0].children[1].children = length 2
@@ -133,17 +134,19 @@ async function react_basics0() {
 
 async function get_one_loop(a) {
      for (let i=0; i< a.length; i++) {
-               
-               console.log("a[i]: ", a[i]);
-               list_of_html_keys.push(a[i]);
-               
-               console.log("a[i].outerText: ", a[i].outerText);
-               list_of_html_values.push(a[i].outerText);
 
-               // go down into the object another level
-               a = a[i].children;
-               await get_one_loop(a);
-          }
+          console.log("i: ", i);
+          
+          console.log("a[i].localName: ", a[i].localName);
+          list_of_html_keys.push(a[i].localName); // or tagName
+          
+          console.log("a[i].textContent: ", a[i].textContent);
+          list_of_html_values.push(a[i].textContent);
+
+          // go down into the object another level
+          a = a[i].children;
+          await get_one_loop(a);
+     }
 }
 
 </script>
