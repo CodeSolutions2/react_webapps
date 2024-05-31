@@ -103,6 +103,7 @@ async function react_basics0() {
          <h1>Exploring navbar using React in JavaScript</h1>
            <ul><li>Item 0</li>
                  <li>Item 1</li>
+                  <li>Item 2</li>
                  </ul></nav>`;
      const fragment = document.createRange().createContextualFragment(htmlString);
      console.log("fragment: ", fragment);
@@ -119,7 +120,7 @@ async function react_basics0() {
      
      // fragment.children[0].children[0].children  = length 0
      // fragment.children[0].children[1] = <ul>
-     // fragment.children[0].children[1].children = length 2
+     // fragment.children[0].children[1].children = length 3
      // fragment.children[0].children[1].children[0] = <li>
 
      // fragment.children[0].children[1].children[1] = <li>
@@ -133,6 +134,7 @@ async function react_basics0() {
 
 
 async function get_one_loop(a) {
+     
      for (let i=0; i< a.length; i++) {
 
           console.log("i: ", i);
