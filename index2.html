@@ -144,6 +144,8 @@ async function react_basics0() {
 
 // How to arrange JavaScript htmlString fragments into the the React DOM format
 async function get_one_loop(a) {
+
+     console.log("a.length: ", a.length);
      
      for (let i=0; i< a.length; i++) {
 
@@ -165,11 +167,23 @@ async function get_one_loop(a) {
 function get_create_element(i) {
 
      if (desc_arr[i] == 'main' &&  desc_arr[i+1] == 'sub' && (i+1) < desc_arr.length) {
-          return "React.createElement(list_of_html_keys[i], {className: list_of_html_keys[i]},"
+          return `React.createElement(${list_of_html_keys[i]}, {className: ${list_of_html_keys[i]}},`
+          
      } else if (desc_arr[i] == 'top' &&  desc_arr[i+1] == 'main' && (i+1) < desc_arr.length) {
-          return "React.createElement(list_of_html_keys[i], {className: list_of_html_keys[i]},"
+          return `React.createElement(${list_of_html_keys[i]}, {className: ${list_of_html_keys[i]}},`
+          
+     } else if (i == desc_arr.length+1){
+          let out = "";
+          for (let i=0; i<desc_arr.length; i++) {
+               if ((i+1) < desc_arr.length){
+                    if ((desc_arr[i] == 'main' &&  desc_arr[i+1] == 'sub') || (desc_arr[i] == 'top' &&  desc_arr[i+1] == 'main') ) {
+                         out = out + ")";
+                    }
+               }
+          }
+          return out+";"
      } else {
-          return "React.createElement(list_of_html_keys[i], {className: list_of_html_keys[i]}, list_of_html_values[i]),"
+          return `React.createElement(${list_of_html_keys[i]}, {className: ${list_of_html_keys[i]}}, ${list_of_html_values[i]}),`
      }
 }
 
@@ -186,7 +200,7 @@ async function get_element() {
      
      
             var element = "";
-          for (let i=0; i<list_of_html_keys.length-1; i++) {
+          for (let i=0; i<list_of_html_keys.length; i++) {
                           element = element + get_create_element(i);
             }
 
