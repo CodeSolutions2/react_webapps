@@ -70,7 +70,7 @@ async function react_table_rowColumn() {
 	// OR
 	
 	const ObjectRow = rowcol.map((row, irow) => { return React.createElement('tr', {className: 'tr', key: `tr_keyName${irow}`}, 
-				 row[irow].map((col, icol) => { return React.createElement('td', {className: 'td', key: `td_keyName${irow}_${icol}`}, `${col}`) })) })
+				 row.map((col, icol) => { return React.createElement('td', {className: 'td', key: `td_keyName${irow}_${icol}`}, `${col}`) })) })
 
 	
 	const element = React.createElement('table', {className: 'table', key: 'table_keyName'}, 
