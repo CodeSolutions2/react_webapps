@@ -167,14 +167,8 @@ async function get_one_loop(a) {
 function get_create_element(i) {
 
      console.log('get_create_element i: ', i)
-     
-     if (desc_arr[i] == 'main' &&  desc_arr[i+1] == 'sub' && (i+1) < desc_arr.length) {
-          return `React.createElement(${list_of_html_keys[i]}, {className: ${list_of_html_keys[i]}},`
-          
-     } else if (desc_arr[i] == 'top' &&  desc_arr[i+1] == 'main' && (i+1) < desc_arr.length) {
-          return `React.createElement(${list_of_html_keys[i]}, {className: ${list_of_html_keys[i]}},`
-          
-     } else if (i == desc_arr.length){
+
+     if (i == desc_arr.length){
           // Print the end
           let out = "";
           for (let j=0; j<desc_arr.length; j++) {
@@ -187,10 +181,21 @@ function get_create_element(i) {
           console.log('out: ', out);
           
           return out+";"
+          
      } else {
-          return `React.createElement(${list_of_html_keys[i]}, {className: ${list_of_html_keys[i]}}, ${list_of_html_values[i]}),`
+          
+          if (desc_arr[i] == 'main' &&  desc_arr[i+1] == 'sub' && (i+1) < desc_arr.length) {
+               return `React.createElement(${list_of_html_keys[i]}, {className: ${list_of_html_keys[i]}},`
+               
+          } else if (desc_arr[i] == 'top' &&  desc_arr[i+1] == 'main' && (i+1) < desc_arr.length) {
+               return `React.createElement(${list_of_html_keys[i]}, {className: ${list_of_html_keys[i]}},`
+          } else {
+               return `React.createElement(${list_of_html_keys[i]}, {className: ${list_of_html_keys[i]}}, ${list_of_html_values[i]}),`
+          }
+          
      }
 }
+
 
 async function get_element() {
 
