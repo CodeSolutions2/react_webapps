@@ -12,6 +12,8 @@
 
 <script>
 
+var list_of_html_keys = [];
+var list_of_html_values = [];
      
 async function react_basics0() {
      
@@ -106,7 +108,42 @@ async function react_basics0() {
      console.log("fragment: ", fragment);
 
 
+
+     // loop from the top down each tree
+     let a = fragment.children;
+     // fragment.children = length 1
+     // fragment.children[0] = <nav>
      
+     // fragment.children[0].children = length 2
+     // fragment.children[0].children[0] = <h1>
+     // fragment.children[0].children[0].children  = length 0
+     // fragment.children[0].children[1] = <ul>
+     // fragment.children[0].children[1].children = length 2
+     // fragment.children[0].children[1].children[0] = <li>
+
+     // fragment.children[0].children[1].children[1] = <li>
+
+     await get_one_loop(a);
+
+     console.log("list_of_html_keys: ", list_of_html_keys);
+     console.log("list_of_html_values: ", list_of_html_values);
+}
+
+
+
+async function get_one_loop(a) {
+     for (let i=0; i< a.length; i++) {
+               
+               console.log("a[i]: ", a[i]);
+               list_of_html_keys.push(a[i]);
+               
+               console.log("a[i].outerText: ", a[i].outerText);
+               list_of_html_values.push(a[i].outerText);
+
+               // go down into the object another level
+               a = a[i].children;
+               await get_one_loop(a);
+          }
 }
 
 </script>
