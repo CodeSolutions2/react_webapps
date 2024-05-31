@@ -61,11 +61,18 @@ async function react_table_rowColumn() {
 	
 	var rowcol = [[1, 3, 5, 7, 9, 11], [2, 4, 6, 8, 10, 12]];
 
-	var ObjectRow = [];
-	for (let i=0; i<rowcol.length; i++) {
-		ObjectRow = React.createElement('tr', {className: 'tr', key: `tr_keyName${i}`}, 
-				 rowcol[i].map((row, ind) => { return React.createElement('td', {className: 'td', key: `td_keyName${i}_${ind}`}, `${row}`) }))
-	}
+	// Prints the last row of rowcol
+	// var ObjectRow = [];
+	// for (let i=0; i<rowcol.length; i++) {
+		// ObjectRow = React.createElement('tr', {className: 'tr', key: `tr_keyName${i}`}, rowcol[i].map((col, ind) => { return React.createElement('td', {className: 'td', key: `td_keyName${i}_${ind}`}, `${col}`) }))
+	// }
+	
+	// OR
+	
+	const ObjectRow = rowcol.map((row, irow) => { return React.createElement('tr', {className: 'tr', key: `tr_keyName${irow}`}, 
+				 row[irow].map((col, icol) => { return React.createElement('td', {className: 'td', key: `td_keyName${irow}_${icol}`}, `${col}`) })) })
+
+	
 	const element = React.createElement('table', {className: 'table', key: 'table_keyName'}, 
 		React.createElement('tbody', {className: 'tbody', key: 'tbody_keyName'}, 
 		 ObjectRow
