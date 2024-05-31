@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+
+<div id="JSX_root"></div>
+     
+<button id="react_basics0" onclick="react_basics0()">React.js in JavaScript</button>
+     
+<script src="https://unpkg.com/react/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+
+<script>
+
+
+async function main() {
+     react_basics0().(out => out).then(function(out) {return out}) 
+}
+     
+async function react_basics0() {
+     
+     // This works, but it is not easy to use. In node.js, one can assign a DOM html string directly to a variable.
+     // const element = React.createElement('div', {className: 'div_name'}, 
+     //      React.createElement('h1', {className: 'div_name'}, 'Header Text'), 
+     //     React.createElement('p', null, 'Paragraph Text'));
+
+     // OR
+     
+     // Incorrect
+     // const htmlString = `<nav>
+     //    <h1>Exploring navbar using React in JavaScript</h1>
+     //      <ul><li>Item 0</li>
+     //         <li>Item 1</li>
+     // </ul></nav>`;
+     // const element = React.createElement(htmlString);
+     
+     // OR
+
+      // Incorrect Uncaught SyntaxError: expected property name, got '{'
+     //  const htmlString = `<nav>
+    //      <h1>Exploring navbar using React in JavaScript</h1>
+     //       <ul><li>Item 0</li>
+    //            <li>Item 1</li>
+    //  </ul></nav>`;
+     // const element = React.createElement('div', null, dangerouslySetInnerHTML={{ __html: htmlString }});
+
+     // OR
+     
+     // So the useEffect runs when the variable htmlString changes
+   
+     // Idea 0
+     // const [htmlString, sethtmlString] = React.useState(`<nav>
+    //     <h1>Exploring navbar using React in JavaScript</h1>
+    //       <ul><li>Item 0</li>
+   //            <li>Item 1</li>
+    // </ul></nav>`);
+
+     // Idea 1
+     const htmlString = `<nav>
+         <h1>Exploring navbar using React in JavaScript</h1>
+       <ul><li>Item 0</li>
+               <li>Item 1</li>
+     </ul></nav>`;
+     const containerRef = React.useRef();
+
+     
+     
+     React.useEffect(() => {
+          
+           const fragment = document.createRange().createContextualFragment(htmlString);
+
+          // Idea 0
+          // let nodes;
+          // I guess it loops over each of the html elements in htmlString and assigns each one to a node
+          // if (nodes.current && fragment) {
+          //      nodes = [...fragment.children];
+           //     console.log('nodes0: ', nodes);
+         //       nodes.current.appendChild(fragment);
+           //     console.log('nodes1: ', nodes);
+         //  }
+          // Then remove the node from the parentElement
+          // nodes.forEach(function(node, ind) {
+         //       node.parentElement.removeChild(node);
+           //     })
+
+          // Idea 1
+          containerRef.current.appendChild(fragment);
+          
+     }, [htmlString]);
+
+     // Idea 0
+    //   const element = React.createElement('div', null, htmlString);
+     
+     // Idea 1
+     const element = React.createElement('div', null, containerRef);
+     // Warning: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+   //1. You might have mismatching versions of React and the renderer (such as React DOM)
+   //2. You might be breaking the Rules of Hooks
+   //3. You might have more than one copy of React in the same app
+   //See https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.
+
+     
+    // -----------------------------------------
+  
+     const container = document.getElementById('JSX_root');
+     const root = ReactDOM.createRoot(container);
+     root.render(element);
+}
+
+</script>
+
+</body>
+</html>
