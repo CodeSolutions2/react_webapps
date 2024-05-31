@@ -141,8 +141,9 @@ async function react_basics0() {
      list_of_html_values = ["", "Exploring navbar using React in JavaScript", "", "Item 0", "Item 1", "Item 2"];
 
 
-     await get_element();
+     var element = await get_element();
 
+     await render_element_to_DOM_via_React(element);
 }
 
 
@@ -185,9 +186,12 @@ function get_create_element(i) {
           }
           console.log('out: ', out);
           return out+";"
-          
+
+     } else if (i == desc_arr.length-1) {
+          // Print the last node of element
+          return `React.createElement(${list_of_html_keys[i]}, {className: ${list_of_html_keys[i]}}, ${list_of_html_values[i]})`
      } else {
-          // Print intermediate sections of element
+          // Print intermediate nodes of element
           if (desc_arr[i] == 'main' &&  desc_arr[i+1] == 'sub' && (i+1) < desc_arr.length) {
                return `React.createElement(${list_of_html_keys[i]}, {className: ${list_of_html_keys[i]}},`
           } else if (desc_arr[i] == 'top' &&  desc_arr[i+1] == 'main' && (i+1) < desc_arr.length) {
@@ -219,12 +223,18 @@ async function get_element() {
             }
 
 console.log("element: ", element);
-     
-    //  const container = document.getElementById('JSX_root');
-     // const root = ReactDOM.createRoot(container);
-    // root.render(element);
+     return element;
 }
 
+
+async function render_element_to_DOM_via_React(element) {
+     
+     const container = document.getElementById('JSX_root');
+     const root = ReactDOM.createRoot(container);
+     root.render(element);
+}
+
+     
 </script>
 
 </body>
