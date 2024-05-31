@@ -160,7 +160,7 @@ function get_create_element(i) {
 
      if (desc_arr[i] == 'main' &&  desc_arr[i+1] == 'sub' && (i+1) < desc_arr.length) {
           return "React.createElement(list_of_html_keys[i], {className: list_of_html_keys[i]},"
-     } if else (desc_arr[i] == 'top' &&  desc_arr[i+1] == 'main' && (i+1) < desc_arr.length) {
+     } else if (desc_arr[i] == 'top' &&  desc_arr[i+1] == 'main' && (i+1) < desc_arr.length) {
           return "React.createElement(list_of_html_keys[i], {className: list_of_html_keys[i]},"
      } else {
           return "React.createElement(list_of_html_keys[i], {className: list_of_html_keys[i]}, list_of_html_values[i]),"
