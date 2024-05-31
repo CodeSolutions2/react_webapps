@@ -174,7 +174,7 @@ function get_create_element(i) {
      } else if (desc_arr[i] == 'top' &&  desc_arr[i+1] == 'main' && (i+1) < desc_arr.length) {
           return `React.createElement(${list_of_html_keys[i]}, {className: ${list_of_html_keys[i]}},`
           
-     } else if (i == desc_arr.length+1){
+     } else if (i == desc_arr.length){
           // Print the end
           let out = "";
           for (let j=0; j<desc_arr.length; j++) {
@@ -205,7 +205,7 @@ async function get_element() {
      
      
             var element = "";
-          for (let i=0; i<list_of_html_keys.length; i++) {
+          for (let i=0; i<list_of_html_keys.length+1; i++) {
                           element = element + get_create_element(i);
             }
 
