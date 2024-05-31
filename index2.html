@@ -12,15 +12,10 @@
 
 <script>
 
-var list_of_html_keys = ["nav", "h1", "ul", "li", "li", "li"];
-var list_of_html_values = ["", "Exploring navbar using React in JavaScript", "", "Item 0", "Item 1", "Item 2"];
-     
-var desc_arr = ['root', 'main', 'main', 'sub', 'sub', 'sub'];
+var list_of_html_keys = ["nav", "h1", "ul", "li", "li", "li", "li"];
+var list_of_html_values = ["", "Exploring navbar using React in JavaScript", "", "Item 0", "Item 1", "Item 2", "Item 3"];
+var desc_arr1_all = ['level0_root', 'level1', 'level1_root', 'level2', 'level2', 'level2', 'level2']
 
-var desc_arr1_all = ['level0_root', 'level1', 'level1_root', 'level2', 'level2', 'level2']
-
-// Make this array from desc_arr and list_of_html_keys
-var rowcol_all = ['nav', 'h1', 'ul', 'li', 'li', 'li'];
 
 // Could modify rowcol such that it only has items without root->main, and main->sub 
 var rowcol =  ['nav', 'ul']; // these are root (root->main) and main_root (main->sub)
@@ -38,22 +33,21 @@ async function react_basics0() {
      
 function get_create_element1(row) {
 
-     // row => ['level0_root', 'level1_root'];
      var start_root_name = row;
      
      // start_root
-     // find the index of row in rowcol_all
+     // find the index of row in list_of_html_keys
      var start_ind = desc_arr1_all.indexOf(start_root_name) + 1;   // 1
 
      // end_root: find the next root
-     var end_shortlist_ind = desc_arr1.indexOf(start_root_name) + 1;  // 1
+     var end_shortlist_ind = desc_arr1.indexOf(start_root_name) + 1;
      var end_root_name = desc_arr1[end_shortlist_ind];   // level1_root
-     var end_ind = desc_arr1_all.indexOf(end_root_name);  // -1  // 2
-
-     var array1 = rowcol_all.slice(start_ind, end_ind);
+     var end_ind = desc_arr1_all.indexOf(end_root_name); 
+     console.log("end_ind: ", end_ind);
+     
+     var array1 = list_of_html_keys.slice(start_ind, end_ind);
      console.log("array1: ", array1);  // 'h1'
 
-     // list_of_html_values = ["", "Exploring navbar using React in JavaScript", "", "Item 0", "Item 1", "Item 2"];
      var list_of_html_values_short = list_of_html_values.slice(start_ind, end_ind); 
      
      // return the items between start_root and end_root
@@ -64,7 +58,6 @@ function get_create_element1(row) {
      
 
 async function get_element() {
-
      var element = desc_arr1.map((row, i) => { 
           return React.createElement(`${rowcol[i]}`, {className: `${rowcol[i]}`, key: `${rowcol[i]}_keyName${i}` }, get_create_element1(row)) })
      
