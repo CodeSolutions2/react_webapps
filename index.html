@@ -9,6 +9,8 @@
 <button id="react_basics0" onclick="react_basics0()">React.js in JavaScript</button>
 <br>
 <button id="react_basics1" onclick="react_basics1()">JavaScript in the style of React.js</button>
+<br>
+<button id="react_table_row" onclick="react_table_row()">React.js table row</button>
      
 <script src="https://unpkg.com/react/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
@@ -36,6 +38,26 @@ async function react_basics1(){
      const container = document.getElementById('JavaScript_root');
      container.appendChild(h1)
      container.appendChild(p);
+}
+
+
+
+async function react_table_row() {
+     
+     var array1 = [2, 3, 4, 5, 7, 8];
+     
+	const ObjectRow = array1.map((row, ind) => { return React.createElement('td', null, `${row}`); key={ind} })
+	const element = React.createElement('table', null, 
+		React.createElement('tbody', {className: 'tblBody'}, 
+		React.createElement('tr', null, ObjectRow) 
+			    ));
+	
+	console.log('element: ', element);
+	
+	const container = document.getElementById('JSX_root');
+	const root = ReactDOM.createRoot(container);
+	root.render(element);
+	
 }
 
 </script>
