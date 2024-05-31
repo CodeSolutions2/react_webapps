@@ -15,7 +15,19 @@
 var list_of_html_keys = [];
 var list_of_html_values = [];
      
-var desc_arr = ['root', 'main', 'main', 'sub', 'sub', 'sub']
+var desc_arr = ['root', 'main', 'main', 'sub', 'sub', 'sub'];
+
+var desc_arr1_all = ['level0_root', 'level1', 'level1_root', 'level2', 'level2', 'level2']
+
+// Make this array from desc_arr and list_of_html_keys
+var rowcol_all = ['nav', 'h1', 'ul', 'li', 'li', 'li'];
+
+// Could modify rowcol such that it only has items without root->main, and main->sub 
+var rowcol =  ['nav', 'ul']; // these are root (root->main) and main_root (main->sub)
+
+var desc_arr1 = ['level0_root', 'level1_root'];
+
+     
      
 async function react_basics0() {
      
