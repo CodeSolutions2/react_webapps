@@ -173,20 +173,18 @@ function get_create_element(i) {
           let out = "";
           for (let j=0; j<desc_arr.length; j++) {
                if ((j+1) < desc_arr.length){
-                    if ((desc_arr[j] == 'main' &&  desc_arr[j+1] == 'sub') || (desc_arr[j] == 'top' &&  desc_arr[j+1] == 'main') ) {
+                    if ((desc_arr[j] == 'main' &&  desc_arr[j+1] == 'sub') || (desc_arr[j] == 'top' &&  desc_arr[j+1] == 'main')) {
                          out = out + ")";
                     }
                }
           }
           console.log('out: ', out);
-          
           return out+";"
           
      } else {
           
           if (desc_arr[i] == 'main' &&  desc_arr[i+1] == 'sub' && (i+1) < desc_arr.length) {
                return `React.createElement(${list_of_html_keys[i]}, {className: ${list_of_html_keys[i]}},`
-               
           } else if (desc_arr[i] == 'top' &&  desc_arr[i+1] == 'main' && (i+1) < desc_arr.length) {
                return `React.createElement(${list_of_html_keys[i]}, {className: ${list_of_html_keys[i]}},`
           } else {
@@ -208,6 +206,7 @@ async function get_element() {
                     // React.createElement('li', {className: 'li'}, 'Item 2'));
      
      
+     console.log('desc_arr.length: ', desc_arr.length)
      
             var element = "";
           for (let i=0; i<list_of_html_keys.length+1; i++) {
