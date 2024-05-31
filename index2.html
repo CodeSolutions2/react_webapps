@@ -15,7 +15,7 @@
 var list_of_html_keys = [];
 var list_of_html_values = [];
      
-var desc_arr = ['top', 'main', 'main', 'sub', 'sub', 'sub']
+var desc_arr = ['root', 'main', 'main', 'sub', 'sub', 'sub']
      
 async function react_basics0() {
      
@@ -112,7 +112,7 @@ async function react_basics0() {
 
 
 
-     // loop from the top down each tree
+     // loop from the root down each tree
      let a = fragment.children;
      // fragment.children = length 1
      // fragment.children[0] = <nav>
@@ -143,7 +143,7 @@ async function react_basics0() {
 
      var element = await get_element();
 
-     await render_element_to_DOM_via_React(element);
+     await render_ReactElement_to_DOM(element);
 }
 
 
@@ -179,7 +179,7 @@ function get_create_element(i) {
           let out = "";
           for (let j=0; j<desc_arr.length; j++) {
                if ((j+1) < desc_arr.length){
-                    if ((desc_arr[j] == 'main' &&  desc_arr[j+1] == 'sub') || (desc_arr[j] == 'top' &&  desc_arr[j+1] == 'main')) {
+                    if ((desc_arr[j] == 'main' &&  desc_arr[j+1] == 'sub') || (desc_arr[j] == 'root' &&  desc_arr[j+1] == 'main')) {
                          out = out + ")";
                     }
                }
@@ -194,7 +194,7 @@ function get_create_element(i) {
           // Print intermediate nodes of element
           if (desc_arr[i] == 'main' &&  desc_arr[i+1] == 'sub' && (i+1) < desc_arr.length) {
                return `React.createElement(${list_of_html_keys[i]}, {className: ${list_of_html_keys[i]}},`
-          } else if (desc_arr[i] == 'top' &&  desc_arr[i+1] == 'main' && (i+1) < desc_arr.length) {
+          } else if (desc_arr[i] == 'root' &&  desc_arr[i+1] == 'main' && (i+1) < desc_arr.length) {
                return `React.createElement(${list_of_html_keys[i]}, {className: ${list_of_html_keys[i]}},`
           } else {
                return `React.createElement(${list_of_html_keys[i]}, {className: ${list_of_html_keys[i]}}, ${list_of_html_values[i]}),`
@@ -204,30 +204,76 @@ function get_create_element(i) {
 }
 
 
+     
+function get_create_element1(row) {
+
+     // row => ['level0_root', 'level1_root'];
+     var start_root_name = row;
+     
+     // start_root
+     // find the index of row in rowcol_all
+     var start_ind = desc_arr1_all.indexOf(start_root_name) + 1;   // 1
+
+     
+     // end_root: find the next root
+     var end_shortlist_ind = desc_arr1.indexOf(start_root_name) + 1;  // 1
+    var end_root_name = desc_arr1[end_shortlist_ind];   // level1_root
+     var end_ind = desc_arr1_all.indexOf(end_root_name);  // -1  // 2
+
+     var array1 = rowcol_all.slice(start_ind, end_ind);
+     console.log("array1: ", array1);  // 'h1'
+
+     // list_of_html_values = ["", "Exploring navbar using React in JavaScript", "", "Item 0", "Item 1", "Item 2"];
+     var list_of_html_values_short = list_of_html_values.slice(start_ind, end_ind); 
+     
+     // return the items between start_root and end_root
+     return array1.map((row, i) => { 
+          return React.createElement(`${row[i]}`, {className: `${row[i]}`, key: `${row[i]}_keyName${i}` }, list_of_html_values_short[i]) })
+     
+}
+     
+
 async function get_element() {
 
-      // const element = 
+     // const element = 
      //    React.createElement('nav', {className: 'nav'}, 
-     //      React.createElement('h1', {className: 'h1'}, 'Exploring navbar using React in JavaScript'), 
-     //     React.createElement('ul', null, 
+     //    React.createElement('h1', {className: 'h1'}, 'Exploring navbar using React in JavaScript'), 
+     //    React.createElement('ul', null, 
                     // React.createElement('li', {className: 'li'}, 'Item 0'), 
                     // React.createElement('li', {className: 'li'}, 'Item 1'), 
                     // React.createElement('li', {className: 'li'}, 'Item 2'));
-     
-     
-     console.log('desc_arr.length: ', desc_arr.length)
-     
-            var element = "";
-          for (let i=0; i<list_of_html_keys.length+1; i++) {
-                          element = element + get_create_element(i);
-            }
 
-console.log("element: ", element);
+     // Idea 0: make element a string - renders a string to the DOM  
+     // var element = "";
+     // for (let i=0; i<list_of_html_keys.length+1; i++) {
+     //      element = element + get_create_element(i);
+     // }
+
+     // Idea 1: 
+     // var desc_arr = ['root', 'main', 'main', 'sub', 'sub', 'sub']
+     // var desc_arr = ['root', 'main', 'main_root', 'sub', 'sub', 'sub']
+     // OK, note: need a better way to name tree nodes  - names are by (current_next) node positions down the tree
+     var desc_arr1_all = ['level0_root', 'level1', 'level1_root', 'level2', 'level2', 'level2']
+     
+     // Make this array from desc_arr and list_of_html_keys
+     var rowcol_all = ['nav', 'h1', 'ul', 'li', 'li', 'li'];
+     
+     // Could modify rowcol such that it only has items without root->main, and main->sub 
+     var rowcol =  ['nav', 'ul']; // these are root (root->main) and main_root (main->sub)
+     
+     var desc_arr1 = ['level0_root', 'level1_root'];
+
+     var element = desc_arr1.map((row, i) => { 
+          return React.createElement(`${rowcol[i]}`, {className: `${rowcol[i]}`, key: `${rowcol[i]}_keyName${i}` }, get_create_element1(row)) })
+     
+     console.log("element: ", element);
+     
      return element;
 }
 
 
-async function render_element_to_DOM_via_React(element) {
+
+async function render_ReactElement_to_DOM(element) {
      
      const container = document.getElementById('JSX_root');
      const root = ReactDOM.createRoot(container);
