@@ -135,6 +135,11 @@ async function react_basics0() {
      // Correct first list_of_html_values value
      list_of_html_values[0] = "";
 
+     // What list_of_html_keys should be... need to repair 
+     // But need to see if it is possible to render the values using this recursive string method
+     list_of_html_keys.push('li');
+     list_of_html_values = ["", "Exploring navbar using React in JavaScript", "", "Item 0", "Item 1", "Item 2"];
+
 
      await get_element();
 
@@ -169,7 +174,7 @@ function get_create_element(i) {
      console.log('get_create_element i: ', i)
 
      if (i == desc_arr.length){
-          // Print the end
+          // Print the end of element
           let out = "";
           for (let j=0; j<desc_arr.length; j++) {
                if ((j+1) < desc_arr.length){
@@ -182,7 +187,7 @@ function get_create_element(i) {
           return out+";"
           
      } else {
-          
+          // Print intermediate sections of element
           if (desc_arr[i] == 'main' &&  desc_arr[i+1] == 'sub' && (i+1) < desc_arr.length) {
                return `React.createElement(${list_of_html_keys[i]}, {className: ${list_of_html_keys[i]}},`
           } else if (desc_arr[i] == 'top' &&  desc_arr[i+1] == 'main' && (i+1) < desc_arr.length) {
