@@ -12,8 +12,8 @@
 
 <script>
 
-var list_of_html_keys = [];
-var list_of_html_values = [];
+var list_of_html_keys = ["nav", "h1", "ul", "li", "li", "li"];
+var list_of_html_values = ["", "Exploring navbar using React in JavaScript", "", "Item 0", "Item 1", "Item 2"];
      
 var desc_arr = ['root', 'main', 'main', 'sub', 'sub', 'sub'];
 
@@ -28,193 +28,11 @@ var rowcol =  ['nav', 'ul']; // these are root (root->main) and main_root (main-
 var desc_arr1 = ['level0_root', 'level1_root'];
 
      
-     
 async function react_basics0() {
-     
-     // This works, but it is not easy to use. In node.js, one can assign a DOM html string directly to a variable.
-     // const element = React.createElement('div', {className: 'div_name'}, 
-     //      React.createElement('h1', {className: 'div_name'}, 'Header Text'), 
-     //     React.createElement('p', null, 'Paragraph Text'));
-
-     // OR
-     
-     // Incorrect
-     // const htmlString = `<nav>
-     //    <h1>Exploring navbar using React in JavaScript</h1>
-     //      <ul><li>Item 0</li>
-     //         <li>Item 1</li>
-     // </ul></nav>`;
-     // const element = React.createElement(htmlString);
-     
-     // OR
-
-      // Incorrect Uncaught SyntaxError: expected property name, got '{'
-     //  const htmlString = `<nav>
-    //      <h1>Exploring navbar using React in JavaScript</h1>
-     //       <ul><li>Item 0</li>
-    //            <li>Item 1</li>
-    //  </ul></nav>`;
-     // const element = React.createElement('div', null, dangerouslySetInnerHTML={{ __html: htmlString }});
-
-     // OR
-     
-     // So the useEffect runs when the variable htmlString changes
-     
-   
-     // Idea 0: use method to loop of each fragment from blog post
-     // const [htmlString, sethtmlString] = React.useState(`<nav>
-    //     <h1>Exploring navbar using React in JavaScript</h1>
-    //       <ul><li>Item 0</li>
-   //            <li>Item 1</li>
-    // </ul></nav>`);
-     // React.useEffect(() => {
-     //       const fragment = document.createRange().createContextualFragment(htmlString);
-          // let nodes;
-          // I guess it loops over each of the html elements in htmlString and assigns each one to a node
-          // if (nodes.current && fragment) {
-          //      nodes = [...fragment.children];
-           //     console.log('nodes0: ', nodes);
-         //       nodes.current.appendChild(fragment);
-           //     console.log('nodes1: ', nodes);
-         //  }
-          // Then remove the node from the parentElement
-          // nodes.forEach(function(node, ind) {
-         //       node.parentElement.removeChild(node);
-           //     })
-    //}, [htmlString]);
-    //   const element = React.createElement('div', null, htmlString);
-     // const container = document.getElementById('JSX_root');
-     // const root = ReactDOM.createRoot(container);
-     // root.render(element);
-
-      // OR
-     
-     // Idea 1: use another react function called useRef used to 'store a variable that will not be rendered' I think
-     // const htmlString = `<nav>
-     //     <h1>Exploring navbar using React in JavaScript</h1>
-     //   <ul><li>Item 0</li>
-     //           <li>Item 1</li>
-     // </ul></nav>`;
-     // const containerRef = React.useRef();
-     // React.useEffect(() => {
-     //       const fragment = document.createRange().createContextualFragment(htmlString);
-     //      containerRef.current.appendChild(fragment);
-     // }, [htmlString]);
-     // const element = React.createElement('div', null, containerRef);
-     // Warning: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
-   //1. You might have mismatching versions of React and the renderer (such as React DOM)
-   //2. You might be breaking the Rules of Hooks
-   //3. You might have more than one copy of React in the same app
-   //See https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.
-  // const container = document.getElementById('JSX_root');
-    // const root = ReactDOM.createRoot(container);
-    //  root.render(element);
-
-     //  OR 
-
-     // Idea 2: first print out the html fragments, and then render each fragment to the other using a for loop
-     const htmlString = `<nav>
-         <h1>Exploring navbar using React in JavaScript</h1>
-           <ul><li>Item 0</li>
-                 <li>Item 1</li>
-                  <li>Item 2</li>
-                 </ul></nav>`;
-     const fragment = document.createRange().createContextualFragment(htmlString);
-     console.log("fragment: ", fragment);
-
-
-
-     // loop from the root down each tree
-     let a = fragment.children;
-     // fragment.children = length 1
-     // fragment.children[0] = <nav>
-     
-     // fragment.children[0].children = length 2
-     // fragment.children[0].children[0] = <h1>
-     
-     // fragment.children[0].children[0].children  = length 0
-     // fragment.children[0].children[1] = <ul>
-     // fragment.children[0].children[1].children = length 3
-     // fragment.children[0].children[1].children[0] = <li>
-
-     // fragment.children[0].children[1].children[1] = <li>
-
-     await get_one_loop(a);
-
-     console.log("list_of_html_keys: ", list_of_html_keys);
-     console.log("list_of_html_values: ", list_of_html_values);
-
-     // Correct first list_of_html_values value
-     // list_of_html_values[0] = "";
-
-     // What list_of_html_keys should be
-     // But need to see if it is possible to render the values using this recursive string method
-     // list_of_html_keys.push('li');
-     list_of_html_keys = ["nav", "h1", "ul", "li", "li", "li"];
-     list_of_html_values = ["", "Exploring navbar using React in JavaScript", "", "Item 0", "Item 1", "Item 2"];
-
-
      var element = await get_element();
-
      await render_ReactElement_to_DOM(element);
 }
 
-
-
-// How to arrange JavaScript htmlString fragments into the the React DOM format
-async function get_one_loop(a) {
-
-     console.log("a.length: ", a.length);
-     
-     for (let i=0; i< a.length; i++) {
-
-          console.log("i: ", i);
-          
-          console.log("a[i].localName: ", a[i].localName);
-          list_of_html_keys.push(a[i].localName); // or tagName
-          
-          console.log("a[i].textContent: ", a[i].textContent);
-          list_of_html_values.push(a[i].textContent);
-
-          // go down into the object another level
-          a = a[i].children;
-          await get_one_loop(a);
-     }
-}
-
-
-function get_create_element(i) {
-
-     console.log('get_create_element i: ', i)
-
-     if (i == desc_arr.length){
-          // Print the end of element
-          let out = "";
-          for (let j=0; j<desc_arr.length; j++) {
-               if ((j+1) < desc_arr.length){
-                    if ((desc_arr[j] == 'main' &&  desc_arr[j+1] == 'sub') || (desc_arr[j] == 'root' &&  desc_arr[j+1] == 'main')) {
-                         out = out + ")";
-                    }
-               }
-          }
-          console.log('out: ', out);
-          return out+";"
-
-     } else if (i == desc_arr.length-1) {
-          // Print the last node of element
-          return `React.createElement(${list_of_html_keys[i]}, {className: ${list_of_html_keys[i]}}, ${list_of_html_values[i]})`
-     } else {
-          // Print intermediate nodes of element
-          if (desc_arr[i] == 'main' &&  desc_arr[i+1] == 'sub' && (i+1) < desc_arr.length) {
-               return `React.createElement(${list_of_html_keys[i]}, {className: ${list_of_html_keys[i]}},`
-          } else if (desc_arr[i] == 'root' &&  desc_arr[i+1] == 'main' && (i+1) < desc_arr.length) {
-               return `React.createElement(${list_of_html_keys[i]}, {className: ${list_of_html_keys[i]}},`
-          } else {
-               return `React.createElement(${list_of_html_keys[i]}, {className: ${list_of_html_keys[i]}}, ${list_of_html_values[i]}),`
-          }
-          
-     }
-}
 
 
      
@@ -227,10 +45,9 @@ function get_create_element1(row) {
      // find the index of row in rowcol_all
      var start_ind = desc_arr1_all.indexOf(start_root_name) + 1;   // 1
 
-     
      // end_root: find the next root
      var end_shortlist_ind = desc_arr1.indexOf(start_root_name) + 1;  // 1
-    var end_root_name = desc_arr1[end_shortlist_ind];   // level1_root
+     var end_root_name = desc_arr1[end_shortlist_ind];   // level1_root
      var end_ind = desc_arr1_all.indexOf(end_root_name);  // -1  // 2
 
      var array1 = rowcol_all.slice(start_ind, end_ind);
@@ -247,34 +64,6 @@ function get_create_element1(row) {
      
 
 async function get_element() {
-
-     // const element = 
-     //    React.createElement('nav', {className: 'nav'}, 
-     //    React.createElement('h1', {className: 'h1'}, 'Exploring navbar using React in JavaScript'), 
-     //    React.createElement('ul', null, 
-                    // React.createElement('li', {className: 'li'}, 'Item 0'), 
-                    // React.createElement('li', {className: 'li'}, 'Item 1'), 
-                    // React.createElement('li', {className: 'li'}, 'Item 2'));
-
-     // Idea 0: make element a string - renders a string to the DOM  
-     // var element = "";
-     // for (let i=0; i<list_of_html_keys.length+1; i++) {
-     //      element = element + get_create_element(i);
-     // }
-
-     // Idea 1: 
-     // var desc_arr = ['root', 'main', 'main', 'sub', 'sub', 'sub']
-     // var desc_arr = ['root', 'main', 'main_root', 'sub', 'sub', 'sub']
-     // OK, note: need a better way to name tree nodes  - names are by (current_next) node positions down the tree
-     var desc_arr1_all = ['level0_root', 'level1', 'level1_root', 'level2', 'level2', 'level2']
-     
-     // Make this array from desc_arr and list_of_html_keys
-     var rowcol_all = ['nav', 'h1', 'ul', 'li', 'li', 'li'];
-     
-     // Could modify rowcol such that it only has items without root->main, and main->sub 
-     var rowcol =  ['nav', 'ul']; // these are root (root->main) and main_root (main->sub)
-     
-     var desc_arr1 = ['level0_root', 'level1_root'];
 
      var element = desc_arr1.map((row, i) => { 
           return React.createElement(`${rowcol[i]}`, {className: `${rowcol[i]}`, key: `${rowcol[i]}_keyName${i}` }, get_create_element1(row)) })
