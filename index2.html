@@ -12,10 +12,6 @@
 
 <script>
 
-
-async function main() {
-     react_basics0().(out => out).then(function(out) {return out}) 
-}
      
 async function react_basics0() {
      
@@ -47,29 +43,16 @@ async function react_basics0() {
      // OR
      
      // So the useEffect runs when the variable htmlString changes
+     
    
-     // Idea 0
+     // Idea 0: use method to loop of each fragment from blog post
      // const [htmlString, sethtmlString] = React.useState(`<nav>
     //     <h1>Exploring navbar using React in JavaScript</h1>
     //       <ul><li>Item 0</li>
    //            <li>Item 1</li>
     // </ul></nav>`);
-
-     // Idea 1
-     const htmlString = `<nav>
-         <h1>Exploring navbar using React in JavaScript</h1>
-       <ul><li>Item 0</li>
-               <li>Item 1</li>
-     </ul></nav>`;
-     const containerRef = React.useRef();
-
-     
-     
-     React.useEffect(() => {
-          
-           const fragment = document.createRange().createContextualFragment(htmlString);
-
-          // Idea 0
+     // React.useEffect(() => {
+     //       const fragment = document.createRange().createContextualFragment(htmlString);
           // let nodes;
           // I guess it loops over each of the html elements in htmlString and assigns each one to a node
           // if (nodes.current && fragment) {
@@ -82,29 +65,48 @@ async function react_basics0() {
           // nodes.forEach(function(node, ind) {
          //       node.parentElement.removeChild(node);
            //     })
-
-          // Idea 1
-          containerRef.current.appendChild(fragment);
-          
      }, [htmlString]);
-
-     // Idea 0
     //   const element = React.createElement('div', null, htmlString);
+     // const container = document.getElementById('JSX_root');
+     // const root = ReactDOM.createRoot(container);
+     // root.render(element);
+
+      // OR
      
-     // Idea 1
-     const element = React.createElement('div', null, containerRef);
+     // Idea 1: use another react function called useRef used to 'store a variable that will not be rendered' I think
+     // const htmlString = `<nav>
+     //     <h1>Exploring navbar using React in JavaScript</h1>
+     //   <ul><li>Item 0</li>
+     //           <li>Item 1</li>
+     // </ul></nav>`;
+     // const containerRef = React.useRef();
+     // React.useEffect(() => {
+     //       const fragment = document.createRange().createContextualFragment(htmlString);
+     //      containerRef.current.appendChild(fragment);
+     // }, [htmlString]);
+     // const element = React.createElement('div', null, containerRef);
      // Warning: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
    //1. You might have mismatching versions of React and the renderer (such as React DOM)
    //2. You might be breaking the Rules of Hooks
    //3. You might have more than one copy of React in the same app
    //See https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.
+  // const container = document.getElementById('JSX_root');
+    // const root = ReactDOM.createRoot(container);
+    //  root.render(element);
+
+     //  OR 
+
+     // Idea 2: first print out the html fragments, and then render each fragment to the other using a for loop
+     const htmlString = `<nav>
+         <h1>Exploring navbar using React in JavaScript</h1>
+           <ul><li>Item 0</li>
+                 <li>Item 1</li>
+                 </ul></nav>`;
+     const fragment = document.createRange().createContextualFragment(htmlString);
+     console.log("fragment: ", fragment);
+
 
      
-    // -----------------------------------------
-  
-     const container = document.getElementById('JSX_root');
-     const root = ReactDOM.createRoot(container);
-     root.render(element);
 }
 
 </script>
