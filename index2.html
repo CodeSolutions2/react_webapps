@@ -4,8 +4,12 @@
 <body>
 
 <div id="JSX_root"></div>
+
+<button id="test_case0_hierarchical_html_elements" onclick="test_case0_hierarchical_html_elements()">test_case0_hierarchical_html_elements</button>
      
-<button id="render_node_element_list" onclick="render_node_element_list()">render_node_element_list</button>
+<button id="test_case1_hierarchical_html_elements" onclick="test_case1_hierarchical_html_elements()">test_case1_hierarchical_html_elements</button>
+     
+<button id="test_case2_hierarchical_html_elements" onclick="test_case2_hierarchical_html_elements()">test_case2_hierarchical_html_elements</button>
      
 <script src="https://unpkg.com/react/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
@@ -13,18 +17,23 @@
 <script>
 
 // -------------------------------------------
-     
-var list_of_html_keys = ["nav", "h1", "ul", "li", "li", "li", "h1", "ul", "li", "li", "li"];
-var list_of_html_values = ["", "Header 0", "", "Item 0", "Item 1", "Item 2", "Header 1", "", "Item 0", "Item 1", "Item 2"];
 
-var desc_arr1_all = ['level0_root', 'level1', 'level1_root', 'level2', 'level2', 'level2', 'level3', 'level3_root', 'level4', 'level4', 'level4'];
-var rowcol =  ['nav', 'ul', 'ul'];
-var desc_arr1 = ['level0_root', 'level1_root', 'level3_root'];
-
+var list_of_html_keys = [];
+var list_of_html_values = [];
+var desc_arr1_all = [];
+var rowcol = [];
+var desc_arr1 = [];
 
 // -------------------------------------------
      
-async function render_node_element_list() {   
+async function test_case0_hierarchical_html_elements() {   
+     
+     list_of_html_keys = ["nav", "h1", "ul", "li", "li", "li"];
+     list_of_html_values = ["", "Header 0", "", "Item 0", "Item 1", "Item 2"];
+     
+     desc_arr1_all = ['level0_root', 'level1', 'level1_root', 'level2', 'level2', 'level2'];
+     rowcol =  ['nav', 'ul'];
+     desc_arr1 = ['level0_root', 'level1_root'];
      
      var element = await get_element();
      await render_ReactElement_to_DOM(element);
@@ -32,6 +41,30 @@ async function render_node_element_list() {
 
 // -------------------------------------------
 
+async function test_case1_hierarchical_html_elements() {   
+     
+     list_of_html_keys = ["nav", "h1", "ul", "li", "li", "li", "h1", "ul", "li", "li", "li"];
+     list_of_html_values = ["", "Header 0", "", "Item 0", "Item 1", "Item 2", "Header 1", "", "Item 0", "Item 1", "Item 2"];
+     
+     desc_arr1_all = ['level0_root', 'level1', 'level1_root', 'level2', 'level2', 'level2', 'level3', 'level3_root', 'level4', 'level4', 'level4'];
+     rowcol =  ['nav', 'ul', 'ul'];
+     desc_arr1 = ['level0_root', 'level1_root', 'level3_root'];
+     
+     var element = await get_element();
+     await render_ReactElement_to_DOM(element);
+
+}
+
+// -------------------------------------------
+
+async function test_case2_hierarchical_html_elements() {   
+     
+     await test_case0_hierarchical_html_elements();
+     await test_case0_hierarchical_html_elements();
+}
+     
+// -------------------------------------------
+     
 async function get_element() {
 
      var element = desc_arr1.map((row, i) => { 
