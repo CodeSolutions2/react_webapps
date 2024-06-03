@@ -72,7 +72,7 @@ async function get_one_loop1(a) {
 
      a = a.children;
 
-     if (a.length == undefined) {
+     if (a.length == undefined || a.length == null) {
           total_keys_path = total_keys_path + 0 + '_none ';
      } else {
           total_keys_path = total_keys_path + a.length + '_' + a[0].localName + ' ';
