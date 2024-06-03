@@ -55,7 +55,7 @@ async function create_node_element_list() {
      let i = 0;
      let flag = "run";
      var levels = [total_c_path.split(` `)];
-     while (flag == 'run') {
+     while (flag == 'run' && i < 4) {
 
           levels.push(total_c_path.split(`${i}_children`));
           
@@ -65,6 +65,8 @@ async function create_node_element_list() {
                i += 1;
           }
      }
+     console.log("flag: ", flag);
+     
      console.log("levels: ", levels);
      
 
@@ -81,6 +83,8 @@ var total_c_path = "";
 var levels = [];
      
 async function get_one_loop1(a) {
+
+     a_before = a;
      
      a = a.children;
 
@@ -91,7 +95,9 @@ async function get_one_loop1(a) {
      } else if (a.length == 0) {
           total_keys_path = total_keys_path + a.length + '_none ';
      } else {
-          total_keys_path = total_keys_path + a.length + '_' + a.localName + ' ';
+          // total_keys_path = total_keys_path + a.length + '_' + a[0].localName + ' ';  // gives nav, h1, li
+          // total_keys_path = total_keys_path + a.length + '_' + a.localName + ' '; // gives undefined
+          total_keys_path = total_keys_path + a.length + '_' + a_before[0].localName + ' ';
      }
      total_c_path = total_c_path + a.length + '_children ';
      
