@@ -83,8 +83,6 @@ var total_c_path = "";
 var levels = [];
      
 async function get_one_loop1(a) {
-
-     let a_before = a;
      
      a = a.children;
 
@@ -95,9 +93,7 @@ async function get_one_loop1(a) {
      } else if (a.length == 0) {
           total_keys_path = total_keys_path + a.length + '_none ';
      } else {
-          // total_keys_path = total_keys_path + a.length + '_' + a[0].localName + ' ';  // gives nav, h1, li
-          // total_keys_path = total_keys_path + a.length + '_' + a.localName + ' '; // gives undefined
-          total_keys_path = total_keys_path + a.length + '_' + a_before[0].localName + ' ';
+          total_keys_path = total_keys_path + a.length + '_' + a[0].localName + ' ';  // gives nav, h1, li
      }
      total_c_path = total_c_path + a.length + '_children ';
      
