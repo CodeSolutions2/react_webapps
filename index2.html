@@ -3,6 +3,7 @@
 <head></head>
 <body>
 
+<h1>Rendering HTML elements in hierarchical order </h1>
 <div id="JSX_root"></div>
 
 <button id="test_case0_hierarchical_html_elements" onclick="test_case0_hierarchical_html_elements()">test_case0_hierarchical_html_elements</button>
@@ -16,6 +17,9 @@
 
 <script>
 
+const container = document.getElementById('JSX_root');
+const root = ReactDOM.createRoot(container);
+     
 // -------------------------------------------
 
 var list_of_html_keys = [];
@@ -36,7 +40,7 @@ async function test_case0_hierarchical_html_elements() {
      desc_arr1 = ['level0_root', 'level1_root'];
      
      var element = await get_element();
-     await render_ReactElement_to_DOM(element);
+     root.render(element);
 }
 
 // -------------------------------------------
@@ -51,7 +55,7 @@ async function test_case1_hierarchical_html_elements() {
      desc_arr1 = ['level0_root', 'level1_root', 'level3_root'];
      
      var element = await get_element();
-     await render_ReactElement_to_DOM(element);
+     root.render(element);
 
 }
 
@@ -60,7 +64,17 @@ async function test_case1_hierarchical_html_elements() {
 async function test_case2_hierarchical_html_elements() {   
      
      await test_case0_hierarchical_html_elements();
-     await test_case0_hierarchical_html_elements();
+
+     var divElement1 = document.createElement('div');
+     divElement1.id = 'JSX_root1';
+     list_of_html_keys = ["nav", "h1", "ul", "li", "li", "li"];
+     list_of_html_values = ["", "Header 0", "", "Item 0", "Item 1", "Item 2"];
+     desc_arr1_all = ['level0_root', 'level1', 'level1_root', 'level2', 'level2', 'level2'];
+     rowcol =  ['nav', 'ul'];
+     desc_arr1 = ['level0_root', 'level1_root'];
+     var element = await get_element();
+     const root1 = ReactDOM.createRoot(document.getElementById('JSX_root1'));
+     root1.render(element);
 }
      
 // -------------------------------------------
@@ -111,15 +125,6 @@ function get_create_element(row) {
           return React.createElement(`${row}`, {className: `${row}`, key: `${row}_keyName${i}` }, list_of_html_values_short[i]) })
 }
 
-// -------------------------------------------
-
-async function render_ReactElement_to_DOM(element) {
-     
-     const container = document.getElementById('JSX_root');
-     const root = ReactDOM.createRoot(container);
-     root.render(element);
-}
-     
 // -------------------------------------------
 
      
