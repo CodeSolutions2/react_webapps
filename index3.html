@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+
+<div id="JSX_root"></div>
+     
+<button id="render_node_element_list" onclick="render_node_element_list()">render_node_element_list</button>
+<br><br>
+<button id="create_node_element_list" onclick="create_node_element_list()">create_node_element_list</button>
+     
+<script src="https://unpkg.com/react/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+
+<script>
+
+// -------------------------------------------
+     
+// Step 0
+var list_of_html_keys = [];
+var list_of_html_values = [];
+
+
+
+// -------------------------------------------
+// Step 0
+// -------------------------------------------
+async function create_node_element_list() {
+     
+     const htmlString = `<nav>
+         <h1>Exploring navbar using React in JavaScript</h1>
+           <ul><li>Item 0</li>
+                 <li>Item 1</li>
+                  <li>Item 2</li>
+                 </ul></nav>`;
+     
+     const fragment = document.createRange().createContextualFragment(htmlString);
+     console.log("fragment: ", fragment);
+
+     // loop from the root down each tree
+     let a = fragment;  // new version
+
+     // new version
+     await get_one_loop1(a);
+     
+     console.log("list_of_html_keys: ", list_of_html_keys);
+     console.log("list_of_html_values: ", list_of_html_values);
+
+     console.log("total_keys_path: ", total_keys_path);
+     console.log("total_c_path: ", total_c_path);
+
+     //  Index guides for where to assign levels
+     let total_c_path_arr = total_c_path.split(' ');
+
+     // Initialize 
+     desc_arr1_all = total_c_path_arr;
+     
+     // ------------------------------------
+     // Go from lowest_level to highest_level
+     // ------------------------------------
+     
+     // calculate the number of levels: each _children needs to be in an array separately
+     let i = 0;
+     let flag = "run";
+
+     
+     let regex = /[\s]/g;
+     const isEmpty = (num) => {let val = num.replace(regex,""); val.length == 0}; 
+
+     // I come into the loop with total_c_path_arr
+     // total_c_path_arr = ["1_children", "2_children", "0_children", "3_children", "0_children", "0_children", "0_children", ""]
+
+     // AND
+
+     // total_c_path = "1_children 2_children 0_children 3_children 0_children 0_children 0_children"
+     // this string will change - when I find an element I remove it from the string
+     
+     // total_c_path = [total_c_path];
+     
+     var search_marker_arr = ['0_children'];
+     
+     while (flag == "run" && i < 4) {
+
+          for (let k=0; k<search_marker_arr.length; k++) {
+               
+               // ------------------------------------
+               
+               // [0] Assign levels for current tree elements
+               // var desc_arr1_all = ['level0_root', 'level1', 'level1_root', 'level2', 'level2', 'level2'];
+               for (let j=0; j<desc_arr1_all.length; j++) {
+                    if (desc_arr1_all[j] == search_marker_arr[k]) {
+                         desc_arr1_all[j] = `level${i}`
+                    }
+               }
+               console.log("desc_arr1_all: ", desc_arr1_all);
+     
+               // ------------------------------------
+
+
+               // for (let m=0; m<total_c_path.length; m++){
+                    // [1] Remove the assigned level from the string list
+              //       total_c_path_arr = total_c_path[m].split(search_marker_arr[k]); 
+              //       console.log("total_c_path_arr: ", total_c_path_arr);
+              //  }
+
+               
+               // [1] Remove the assigned level from the string list
+               total_c_path_arr = total_c_path.split(search_marker_arr[k]); 
+               console.log("total_c_path_arr: ", total_c_path_arr);
+               
+               
+               // Remove empty elements in the array
+               // Way 0
+               total_c_path_arr = total_c_path_arr.filter(isEmpty);
+               console.log("total_c_path_arr: ", total_c_path_arr);
+               
+               // Way 1
+               //let total_c_path_arr_notEmpty = [];
+               //for (let j=0; j<total_c_path_arr.length; j++) {
+               //     if (total_c_path_arr[j].replace(regex,"").length != 0) {
+               //          total_c_path_arr_notEmpty.push(total_c_path_arr[j]);
+                //    }
+              // }
+               
+               // ------------------------------------
+     
+               // Put the string back together without the current level
+               total_c_path = total_c_path_arr.join("");
+     
+               // Remove two or more consectutive spaces, and replace with one space, from string
+               let regex = /\s+/g;
+               total_c_path.replace(regex, " ");
+
+
+          }
+          
+          
+          // ------------------------------------
+
+          // Determine if a higher level should be assigned (do another loop): if children repeat 2 or more create a higher level
+          // see how many times children repeat per element
+          let regex = /children/g;
+
+          for (let j=0; j<total_c_path_arr.length; j++) {
+               let iterator = [...total_c_path_arr[j].matchAll(regexp)];
+
+               let count = Array.from(iterator);
+
+               // Reassign the assignment search_marker: based on how many children were found
+               // If one 'children' found the field is the next assignment search_marker
+               if (count < 2) {
+                    search_marker_arr.push(total_c_path_arr[j]);
+               } else {
+                    // find the 'num_children' at the end of each total_c_path_arr[j] string
+                    search_marker_arr.push(total_c_path_arr[j].split(' ').pop());
+               }
+               
+          }
+          // search_marker_arr = ["3_children", "2_children"]
+          console.log("search_marker_arr: ", search_marker_arr);
+
+          // ------------------------------------
+          
+          if (search_marker_arr.length == 0) {
+               flag == 'stop';
+          } else {
+               i += 1;
+          }
+
+          
+     }
+     console.log("flag: ", flag);
+     
+}
+
+     
+// make list_of_html_values = "" if it is a root
+
+// To do : needs to be created from Part 1 output 
+var levels = ['level0_root', 'level1', 'level1_root', 'level2', 'level2', 'level2']; // this is desc_arr1_all
+var desc_arr1_all = [];
+     
+var rowcol =  ['nav', 'ul'];
+var desc_arr1 = ['level0_root', 'level1_root'];
+
+
+     
+// -------------------------------------------
+
+var total_keys_path = "";
+var total_c_path = "";
+var levels = [];
+     
+async function get_one_loop1(a) {
+     
+     a = a.children;
+
+     console.log("a.length: ", a.length);
+     
+     // if (a.length == undefined || a.length == null) {
+     //      total_keys_path = total_keys_path + 0 + '_none ';
+     // } else if (a.length == 0) {
+     //      total_keys_path = total_keys_path + a.length + '_none ';
+     // } else {
+     //      total_keys_path = total_keys_path + a.length + '_' + a[0].localName + ' ';  // gives nav, h1, li
+     // }
+     
+     total_c_path = total_c_path + a.length + '_children ';
+     
+     for (let i=0; i< a.length; i++) {
+          console.log("a[i].localName: ", a[i].localName);
+          list_of_html_keys.push(a[i].localName); // or tagName
+          
+          console.log("a[i].textContent: ", a[i].textContent);
+          list_of_html_values.push(a[i].textContent);
+
+          if (i == 0) {
+               total_keys_path = total_keys_path + a.length + '_' + a[i].localName + ' ';
+          }
+               
+          // go down into the object another level
+          await get_one_loop1(a[i]);
+     }
+}
+
+// -------------------------------------------
+
+
+
+
+
+     
+
+// -------------------------------------------
+// Step 2
+// -------------------------------------------
+async function render_node_element_list() {   
+     
+     var element = await get_element();
+     await render_ReactElement_to_DOM(element);
+}
+
+// -------------------------------------------
+
+async function get_element() {
+
+     var element = desc_arr1.map((row, i) => { 
+          return React.createElement(`${rowcol[i]}`, {className: `${rowcol[i]}`, key: `${rowcol[i]}_keyName${i}` }, get_create_element1(row)) })
+     
+     console.log("element: ", element);
+     
+     return element;
+}
+
+// -------------------------------------------
+
+function get_create_element1(row) {
+
+     // row => ['level0_root', 'level1_root'];
+     var start_root_name = row;
+     
+     // start_root
+     // find the index of row in list_of_html_keys
+     var start_ind = levels.indexOf(start_root_name) + 1;   // 1
+     console.log("start_ind: ", start_ind);
+     
+     // end_root: find the next root
+     var end_shortlist_ind = desc_arr1.indexOf(start_root_name) + 1;  // 1
+     console.log("end_shortlist_ind: ", end_shortlist_ind);
+     
+     var end_root_name = desc_arr1[end_shortlist_ind];   // level1_root
+     console.log("end_root_name: ", end_root_name);
+
+     // Value if not at the end of the node list
+     var end_ind = levels.indexOf(end_root_name);
+     
+     // If at the end of the node list, re-assign end_ind (end_root_name will be undefined)
+     if (end_root_name == null || end_root_name == undefined) {
+          end_ind = levels.length;
+     }
+     console.log("end_ind: ", end_ind);
+
+     var array1 = list_of_html_keys.slice(start_ind, end_ind);
+     console.log("array1: ", array1);  // 'h1'
+     
+     var list_of_html_values_short = list_of_html_values.slice(start_ind, end_ind);
+     console.log("list_of_html_values_short: ", list_of_html_values_short);
+     
+     // return the items between start_root and end_root
+     return array1.map((row, i) => { 
+          return React.createElement(`${row}`, {className: `${row}`, key: `${row}_keyName${i}` }, list_of_html_values_short[i]) })
+}
+
+// -------------------------------------------
+
+async function render_ReactElement_to_DOM(element) {
+     
+     const container = document.getElementById('JSX_root');
+     const root = ReactDOM.createRoot(container);
+     root.render(element);
+}
+     
+// -------------------------------------------
+
+
+
+
+
+
+     
+
+     
+</script>
+
+</body>
+</html>
