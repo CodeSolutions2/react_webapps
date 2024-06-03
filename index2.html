@@ -38,11 +38,7 @@ async function create_node_element_list() {
      console.log("fragment: ", fragment);
 
      // loop from the root down each tree
-     // let a = fragment.children; // old version
      let a = fragment;  // new version
-
-     // old version 
-     // await get_one_loop(a);
 
      // new version
      await get_one_loop1(a);
@@ -58,7 +54,7 @@ async function create_node_element_list() {
      // calculate the number of levels: each _children needs to be in an array separately
      let i = 0;
      let flag = "run";
-     var levels = [total_c_path];
+     var levels = [total_c_path.split(` `)];
      while (flag == 'run') {
 
           levels.push(total_c_path.split(`${i}_children`));
