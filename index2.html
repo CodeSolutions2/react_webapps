@@ -5,16 +5,30 @@
 
 <div id="JSX_root"></div>
      
-<button id="react_basics0" onclick="react_basics0()">React.js in JavaScript</button>
+<button id="render_node_element_list" onclick="render_node_element_list()">render_node_element_list</button>
+<br><br>
+<button id="create_node_element_list" onclick="create_node_element_list()">create_node_element_list</button>
      
 <script src="https://unpkg.com/react/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
 
 <script>
 
+// -------------------------------------------
+     
+// Part 0
+var list_of_html_keys_part0 = ["nav", "h1", "ul", "li", "li", "li"];
+var list_of_html_values_part0 = ["", "Exploring navbar using React in JavaScript", "", "Item 0", "Item 1", "Item 2"];
+
+// -------------------------------------------
+     
+// Part 1
 var list_of_html_keys = [];
 var list_of_html_values = [];
+
+// -------------------------------------------
      
+// To do : needs to be created from Part 1 output 
 var desc_arr = ['root', 'main', 'main', 'sub', 'sub', 'sub'];
 var desc_arr1_all = ['level0_root', 'level1', 'level1_root', 'level2', 'level2', 'level2']
 
@@ -22,8 +36,7 @@ var desc_arr1_all = ['level0_root', 'level1', 'level1_root', 'level2', 'level2',
 var rowcol =  ['nav', 'ul']; // these are root (root->main) and main_root (main->sub)
 var desc_arr1 = ['level0_root', 'level1_root'];
 
-var list_of_html_keys = ["nav", "h1", "ul", "li", "li", "li"];
-var list_of_html_values = ["", "Exploring navbar using React in JavaScript", "", "Item 0", "Item 1", "Item 2"];
+
 
 
 // -------------------------------------------
@@ -75,20 +88,16 @@ function get_create_element1(row) {
      }
      console.log("end_ind: ", end_ind);
 
-     var array1 = list_of_html_keys.slice(start_ind, end_ind);
+     var array1 = list_of_html_keys_part0.slice(start_ind, end_ind);
      console.log("array1: ", array1);  // 'h1'
      
-     var list_of_html_values_short = list_of_html_values.slice(start_ind, end_ind);
-     console.log("list_of_html_values_short: ", list_of_html_values_short);
+     var list_of_html_values_part0_short = list_of_html_values_part0.slice(start_ind, end_ind);
+     console.log("list_of_html_values_part0_short: ", list_of_html_values_part0_short);
      
      // return the items between start_root and end_root
      return array1.map((row, i) => { 
-          return React.createElement(`${row}`, {className: `${row}`, key: `${row}_keyName${i}` }, list_of_html_values_short[i]) })
+          return React.createElement(`${row}`, {className: `${row}`, key: `${row}_keyName${i}` }, list_of_html_values_part0_short[i]) })
 }
-
-
-     
-
 
 // -------------------------------------------
 
@@ -133,27 +142,9 @@ async function create_node_element_list() {
 
      // new version
      await get_one_loop1(a);
-}
-
      
-async function get_one_loop(a) {
-
-     console.log("a.length: ", a.length);
-     
-     for (let i=0; i< a.length; i++) {
-
-          console.log("i: ", i);
-          
-          console.log("a[i].localName: ", a[i].localName);
-          list_of_html_keys.push(a[i].localName); // or tagName
-          
-          console.log("a[i].textContent: ", a[i].textContent);
-          list_of_html_values.push(a[i].textContent);
-
-          // go down into the object another level
-          a = a[i].children;
-          await get_one_loop(a);
-     }
+     console.log("list_of_html_keys: ", list_of_html_keys);
+     console.log("list_of_html_values: ", list_of_html_values);
 }
 
 // -------------------------------------------
@@ -175,11 +166,33 @@ async function get_one_loop1(a) {
           list_of_html_values.push(a[i].textContent);
 
           // go down into the object another level
-          await get_one_loop(a);
+          await get_one_loop1(a[i]);
      }
 }
 
 // -------------------------------------------
+
+
+     
+async function get_one_loop(a) {
+
+     console.log("a.length: ", a.length);
+     
+     for (let i=0; i< a.length; i++) {
+
+          console.log("i: ", i);
+          
+          console.log("a[i].localName: ", a[i].localName);
+          list_of_html_keys.push(a[i].localName); // or tagName
+          
+          console.log("a[i].textContent: ", a[i].textContent);
+          list_of_html_values.push(a[i].textContent);
+
+          // go down into the object another level
+          a = a[i].children;
+          await get_one_loop(a);
+     }
+}
 
 
      
