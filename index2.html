@@ -18,57 +18,169 @@ var list_of_html_values = [];
 var desc_arr = ['root', 'main', 'main', 'sub', 'sub', 'sub'];
 var desc_arr1_all = ['level0_root', 'level1', 'level1_root', 'level2', 'level2', 'level2']
 
-// Make this array from desc_arr and list_of_html_keys
-var rowcol_all = ['nav', 'h1', 'ul', 'li', 'li', 'li'];
-
 // Could modify rowcol such that it only has items without root->main, and main->sub 
 var rowcol =  ['nav', 'ul']; // these are root (root->main) and main_root (main->sub)
-
 var desc_arr1 = ['level0_root', 'level1_root'];
 
+var list_of_html_keys = ["nav", "h1", "ul", "li", "li", "li"];
+var list_of_html_values = ["", "Exploring navbar using React in JavaScript", "", "Item 0", "Item 1", "Item 2"];
 
 
-async function react_basics0() {
-   const htmlString = `<nav>
-         <h1>Exploring navbar using React in JavaScript</h1>
-           <ul><li>Item 0</li>
-                 <li>Item 1</li>
-                  <li>Item 2</li>
-                 </ul></nav>`;
-     const fragment = document.createRange().createContextualFragment(htmlString);
-     console.log("fragment: ", fragment);
-
-     // loop from the root down each tree
-     let a = fragment.children;
-
-     await get_one_loop(a);
-
-     console.log("list_of_html_keys: ", list_of_html_keys);
-     console.log("list_of_html_values: ", list_of_html_values);
-
-     // Correct first list_of_html_values value
-     // list_of_html_values[0] = "";
-
-     // What list_of_html_keys should be
-     // But need to see if it is possible to render the values using this recursive string method
-     // list_of_html_keys.push('li');
-     list_of_html_keys = ["nav", "h1", "ul", "li", "li", "li"];
-     list_of_html_values = ["", "Exploring navbar using React in JavaScript", "", "Item 0", "Item 1", "Item 2"];
-
-
+// -------------------------------------------
+// Part 0
+// -------------------------------------------
+async function render_node_element_list() {   
+     
      var element = await get_element();
-
      await render_ReactElement_to_DOM(element);
 }
 
+// -------------------------------------------
+
+async function get_element() {
+
+     var element = desc_arr1.map((row, i) => { 
+          return React.createElement(`${rowcol[i]}`, {className: `${rowcol[i]}`, key: `${rowcol[i]}_keyName${i}` }, get_create_element1(row)) })
+     
+     console.log("element: ", element);
+     
+     return element;
+}
+
+// -------------------------------------------
+
+function get_create_element1(row) {
+
+     // row => ['level0_root', 'level1_root'];
+     var start_root_name = row;
+     
+     // start_root
+     // find the index of row in list_of_html_keys
+     var start_ind = desc_arr1_all.indexOf(start_root_name) + 1;   // 1
+     console.log("start_ind: ", start_ind);
+     
+     // end_root: find the next root
+     var end_shortlist_ind = desc_arr1.indexOf(start_root_name) + 1;  // 1
+     console.log("end_shortlist_ind: ", end_shortlist_ind);
+     
+     var end_root_name = desc_arr1[end_shortlist_ind];   // level1_root
+     console.log("end_root_name: ", end_root_name);
+
+     // Value if not at the end of the node list
+     var end_ind = desc_arr1_all.indexOf(end_root_name);
+     
+     // If at the end of the node list, re-assign end_ind (end_root_name will be undefined)
+     if (end_root_name == null || end_root_nam == undefined) {
+          end_ind = desc_arr1_all.length - 1;
+     }
+     console.log("end_ind: ", end_ind);
+
+     var array1 = list_of_html_keys.slice(start_ind, end_ind);
+     console.log("array1: ", array1);  // 'h1'
+     
+     var list_of_html_values_short = list_of_html_values.slice(start_ind, end_ind);
+     console.log("list_of_html_values_short: ", list_of_html_values_short);
+     
+     // return the items between start_root and end_root
+     return array1.map((row, i) => { 
+          return React.createElement(`${row}`, {className: `${row}`, key: `${row}_keyName${i}` }, list_of_html_values_short[i]) })
+}
 
 
+     
+
+
+// -------------------------------------------
+
+     
 async function render_ReactElement_to_DOM(element) {
      
      const container = document.getElementById('JSX_root');
      const root = ReactDOM.createRoot(container);
      root.render(element);
 }
+     
+// -------------------------------------------
+
+
+
+
+
+
+     
+
+// -------------------------------------------
+// Part 1
+// -------------------------------------------
+async function create_node_element_list() {
+     
+     const htmlString = `<nav>
+         <h1>Exploring navbar using React in JavaScript</h1>
+           <ul><li>Item 0</li>
+                 <li>Item 1</li>
+                  <li>Item 2</li>
+                 </ul></nav>`;
+     
+     const fragment = document.createRange().createContextualFragment(htmlString);
+     console.log("fragment: ", fragment);
+
+     // loop from the root down each tree
+     // let a = fragment.children; // old version
+     let a = fragment;  // new version
+
+     // old version 
+     // await get_one_loop(a);
+
+     // new version
+     await get_one_loop1(a);
+}
+
+     
+async function get_one_loop(a) {
+
+     console.log("a.length: ", a.length);
+     
+     for (let i=0; i< a.length; i++) {
+
+          console.log("i: ", i);
+          
+          console.log("a[i].localName: ", a[i].localName);
+          list_of_html_keys.push(a[i].localName); // or tagName
+          
+          console.log("a[i].textContent: ", a[i].textContent);
+          list_of_html_values.push(a[i].textContent);
+
+          // go down into the object another level
+          a = a[i].children;
+          await get_one_loop(a);
+     }
+}
+
+// -------------------------------------------
+
+async function get_one_loop1(a) {
+
+     console.log("a.length: ", a.length);
+
+     a = a.children;
+     
+     for (let i=0; i< a.length; i++) {
+
+          console.log("i: ", i);
+          
+          console.log("a[i].localName: ", a[i].localName);
+          list_of_html_keys.push(a[i].localName); // or tagName
+          
+          console.log("a[i].textContent: ", a[i].textContent);
+          list_of_html_values.push(a[i].textContent);
+
+          // go down into the object another level
+          await get_one_loop(a);
+     }
+}
+
+// -------------------------------------------
+
 
      
 </script>
