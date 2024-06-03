@@ -81,8 +81,6 @@ var total_c_path = "";
 var levels = [];
      
 async function get_one_loop1(a) {
-
-     a_before = a[0].localName;
      
      a = a.children;
 
@@ -93,7 +91,7 @@ async function get_one_loop1(a) {
      } else if (a.length == 0) {
           total_keys_path = total_keys_path + a.length + '_none ';
      } else {
-          total_keys_path = total_keys_path + a.length + '_' + a_before + ' ';
+          total_keys_path = total_keys_path + a.length + '_' + a.localName + ' ';
      }
      total_c_path = total_c_path + a.length + '_children ';
      
