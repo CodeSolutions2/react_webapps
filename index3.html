@@ -52,7 +52,13 @@ async function create_node_element_list() {
      console.log("total_keys_path2: ", total_keys_path2);
 
      // ------------------------------------
-     
+
+     let num_html = total_keys_path2.split(' ');
+console.log("num_html: ", num_html);
+     // for (let i=0; i < num_html.length; i++) {
+
+     //      if (i)
+    //  }
      
      // ------------------------------------
 
@@ -81,7 +87,7 @@ async function get_one_loop(a) {
           console.log("a[i].textContent: ", a[i].textContent);
           list_of_html_values.push(a[i].textContent);
 
-          total_keys_path2 = total_keys_path2 + a.length + ' ' + a[i].localName + '_';
+          total_keys_path2 = total_keys_path2 + a.length + ' ' + a[i].localName + ' ';
                
           // go down into the object another level
           await get_one_loop(a[i]);
