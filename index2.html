@@ -37,8 +37,6 @@ async function get_element() {
      var element = desc_arr1.map((row, i) => { 
           return React.createElement(`${rowcol[i]}`, {className: `${rowcol[i]}`, key: `${rowcol[i]}_keyName${i}` }, get_create_element(row)) })
      
-     console.log("element: ", element);
-     
      return element;
 }
 
@@ -46,20 +44,19 @@ async function get_element() {
 
 function get_create_element(row) {
 
-     // row => ['level0_root', 'level1_root'];
      var start_root_name = row;
      
      // start_root
      // find the index of row in list_of_html_keys
-     var start_ind = desc_arr1_all.indexOf(start_root_name) + 1;   // 1
-     console.log("start_ind: ", start_ind);
+     var start_ind = desc_arr1_all.indexOf(start_root_name) + 1;
+     // console.log("start_ind: ", start_ind);
      
      // end_root: find the next root
-     var end_shortlist_ind = desc_arr1.indexOf(start_root_name) + 1;  // 1
-     console.log("end_shortlist_ind: ", end_shortlist_ind);
+     var end_shortlist_ind = desc_arr1.indexOf(start_root_name) + 1;
+     // console.log("end_shortlist_ind: ", end_shortlist_ind);
      
-     var end_root_name = desc_arr1[end_shortlist_ind];   // level1_root
-     console.log("end_root_name: ", end_root_name);
+     var end_root_name = desc_arr1[end_shortlist_ind];
+     // console.log("end_root_name: ", end_root_name);
 
      // Value if not at the end of the node list
      var end_ind = desc_arr1_all.indexOf(end_root_name);
@@ -68,13 +65,13 @@ function get_create_element(row) {
      if (end_root_name == null || end_root_name == undefined) {
           end_ind = desc_arr1_all.length;
      }
-     console.log("end_ind: ", end_ind);
+     // console.log("end_ind: ", end_ind);
 
      var array1 = list_of_html_keys.slice(start_ind, end_ind);
-     console.log("array1: ", array1);  // 'h1'
+     // console.log("array1: ", array1);
      
      var list_of_html_values_short = list_of_html_values.slice(start_ind, end_ind);
-     console.log("list_of_html_values_short: ", list_of_html_values_short);
+     // console.log("list_of_html_values_short: ", list_of_html_values_short);
      
      // return the items between start_root and end_root
      return array1.map((row, i) => { 
