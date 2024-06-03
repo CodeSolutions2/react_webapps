@@ -73,8 +73,9 @@ async function get_one_loop1(a) {
      
      if (a.length == undefined || a.length == null) {
           total_keys_path = total_keys_path + 0 + '_none ';
+     } else if (a.length == 0) {
+          total_keys_path = total_keys_path + a.length + '_none ';
      } else {
-          
           total_keys_path = total_keys_path + a.length + '_' + a[0].localName + ' ';
      }
      total_c_path = total_c_path + a.length + '_children ';
