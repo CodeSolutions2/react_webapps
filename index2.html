@@ -6,16 +6,12 @@
 <h1>Rendering HTML elements in hierarchical order </h1>
 <div id="JSX_root"></div>
 
-<button id="test_case0_hierarchical_html_elements" onclick="test_case0_hierarchical_html_elements()">test_case0_hierarchical_html_elements</button>
-     
-<button id="test_case1_hierarchical_html_elements" onclick="test_case1_hierarchical_html_elements()">test_case1_hierarchical_html_elements</button>
-     
-<button id="test_case2_hierarchical_html_elements" onclick="test_case2_hierarchical_html_elements()">test_case2_hierarchical_html_elements</button>
+<button id="test_case0_hierarchical_html_elements" onclick="test_case0_hierarchical_html_elements()">One root, one header in hierarchical order</button>
+<br> 
+<button id="test_case1_hierarchical_html_elements" onclick="test_case1_hierarchical_html_elements()">One root, two headers in hierarchical order</button>
+<br> 
+<button id="test_case2_hierarchical_html_elements" onclick="test_case2_hierarchical_html_elements()">Two roots, one header in hierarchical order per root</button>
 
-<button id="test_case3_hierarchical_html_elements" onclick="test_case3_hierarchical_html_elements()">test_case3_hierarchical_html_elements</button>
-
-<button id="test_case4_hierarchical_html_elements" onclick="test_case4_hierarchical_html_elements()">test_case4_hierarchical_html_elements</button>
-     
 <script src="https://unpkg.com/react/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
 
@@ -54,9 +50,9 @@ async function test_case1_hierarchical_html_elements() {
      list_of_html_keys = ["nav", "h1", "ul", "li", "li", "li", "h1", "ul", "li", "li", "li"];
      list_of_html_values = ["", "Header 0", "", "Item 0", "Item 1", "Item 2", "Header 1", "", "Item 0", "Item 1", "Item 2"];
      
-     desc_arr1_all = ['level0_root', 'level1', 'level1_root', 'level2', 'level2', 'level2', 'level3', 'level3_root', 'level4', 'level4', 'level4'];
+     desc_arr1_all = ['level0_root', 'level1', 'level1_root', 'level2', 'level2', 'level2', 'level2', 'level2_root', 'level3', 'level3', 'level3'];
      rowcol =  ['nav', 'ul', 'ul'];
-     desc_arr1 = ['level0_root', 'level1_root', 'level3_root'];
+     desc_arr1 = ['level0_root', 'level1_root', 'level2_root'];
      
      var element = await get_element();
      root.render(element);
@@ -68,11 +64,11 @@ async function test_case1_hierarchical_html_elements() {
 async function test_case2_hierarchical_html_elements() {   
      
      await test_case0_hierarchical_html_elements();
-     await test_case3_hierarchical_html_elements();
+     await Reactroot_created_with_JavaScript();
      
 }
 
-async function test_case3_hierarchical_html_elements() { 
+async function Reactroot_created_with_JavaScript() { 
 
      // Render a hierarchical root of element
      list_of_html_keys = ["nav", "h1", "ul", "li", "li", "li"];
@@ -91,19 +87,7 @@ async function test_case3_hierarchical_html_elements() {
 // -------------------------------------------
 
      
-async function test_case4_hierarchical_html_elements() {   
-     
-     list_of_html_keys = ["nav", "h1", "ul", "li", "li", "li", "h1", "ul", "li", "li", "li"];
-     list_of_html_values = ["", "Header 0", "", "Item 0", "Item 1", "Item 2", "Header 1", "", "Item 0", "Item 1", "Item 2"];
-     
-     desc_arr1_all = ['level0_root', 'level1', 'level1_root', 'level2', 'level2', 'level2', 'level2', 'level2_root', 'level3', 'level3', 'level3'];
-     rowcol =  ['nav', 'ul', 'ul'];
-     desc_arr1 = ['level0_root', 'level1_root', 'level2_root'];
-     
-     var element = await get_element();
-     root.render(element);
 
-}
 
 
      
