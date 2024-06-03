@@ -45,7 +45,7 @@ async function create_node_element_list() {
      // await get_one_loop(a);
 
      // new version
-     await get_one_loop1(a, loop);
+     await get_one_loop1(a);
      
      console.log("list_of_html_keys: ", list_of_html_keys);
      console.log("list_of_html_values: ", list_of_html_values);
@@ -55,12 +55,10 @@ async function create_node_element_list() {
 
 // -------------------------------------------
 
-var loc_obj = {};
-var loop = 0;
 var total_c_path = "";
 var list_of_paths = [];
      
-async function get_one_loop1(a, loop) {
+async function get_one_loop1(a) {
 
      console.log("a.length: ", a.length);
 
