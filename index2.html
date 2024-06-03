@@ -54,9 +54,27 @@ async function create_node_element_list() {
      console.log("total_c_path: ", total_c_path);
 
      // go from lowest_level to highest_level
-     levels.push(total_c_path.split('0_children'));
+
+     // calculate the number of levels: each _children needs to be in an array separately
+     let i = 0;
+     let flag = "run";
+     var levels = [total_c_path];
+     while (flag == 'run') {
+
+          levels.push(total_c_path.split(`${i}_children`));
+          
+          if (levels[i].length == 1) {
+               flag == 'stop';
+          } else {
+               i += 1;
+          }
+     }
+     console.log("levels: ", levels);
      
-     // need to count
+
+     // let regexp = new RegExp(`${i}_children`, 'g');
+          // let iterator = [...total_c_path.matchAll(regexp)];
+          //let matches0 = Array.from(iterator);
      
 }
 
@@ -67,6 +85,9 @@ var total_c_path = "";
 var levels = [];
      
 async function get_one_loop1(a) {
+
+     a_before = a[0].localName;
+     
      a = a.children;
 
      console.log("a.length: ", a.length);
@@ -76,7 +97,7 @@ async function get_one_loop1(a) {
      } else if (a.length == 0) {
           total_keys_path = total_keys_path + a.length + '_none ';
      } else {
-          total_keys_path = total_keys_path + a.length + '_' + a[0].localName + ' ';
+          total_keys_path = total_keys_path + a.length + '_' + a_before + ' ';
      }
      total_c_path = total_c_path + a.length + '_children ';
      
