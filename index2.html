@@ -50,13 +50,21 @@ async function create_node_element_list() {
      console.log("list_of_html_keys: ", list_of_html_keys);
      console.log("list_of_html_values: ", list_of_html_values);
 
-     console.log("list_of_paths: ", list_of_paths);
+     console.log("total_keys_path: ", total_keys_path);
+     console.log("total_c_path: ", total_c_path);
+
+     // go from lowest_level to highest_level
+     levels.push(total_c_path.split('0_children'));
+     
+     // need to count
+     
 }
 
 // -------------------------------------------
 
+var total_keys_path = "";
 var total_c_path = "";
-var list_of_paths = [];
+var levels = [];
      
 async function get_one_loop1(a) {
 
@@ -64,14 +72,10 @@ async function get_one_loop1(a) {
 
      a = a.children;
 
-     total_c_path = total_c_path + '_children '+a.length;
-     list_of_paths.push(total_c_path);
+     total_keys_path = total_keys_path + a.length + '_' + a[i].localName + ' ';
+     total_c_path = total_c_path + a.length + '_children ';
      
      for (let i=0; i< a.length; i++) {
-
-          
-          console.log("i: ", i);
-          
           console.log("a[i].localName: ", a[i].localName);
           list_of_html_keys.push(a[i].localName); // or tagName
           
