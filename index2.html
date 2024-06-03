@@ -65,7 +65,7 @@ async function create_node_element_list() {
 
      
      let regex = /[\s]/g;
-     const isEmpty = (num) => let val = num.replace(regex,""); val.length == 0; 
+     const isEmpty = (num) => {let val = num.replace(regex,""); val.length == 0}; 
 
      // I come into the loop with total_c_path_arr
      // total_c_path_arr = ["1_children", "2_children", "0_children", "3_children", "0_children", "0_children", "0_children", ""]
