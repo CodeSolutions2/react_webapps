@@ -137,10 +137,8 @@ async function create_node_element_list() {
 
           // Determine if a higher level should be assigned (do another loop): if children repeat 2 or more create a higher level
           // see how many times children repeat per element
-          let regex = /children/g;
-
           for (let j=0; j<total_c_path_arr.length; j++) {
-               let iterator = [...total_c_path_arr[j].matchAll(regexp)];
+               let iterator = [...total_c_path_arr[j].matchAll(/children/g)];
 
                let count = Array.from(iterator);
 
@@ -202,7 +200,7 @@ async function get_one_loop(a) {
           console.log("a[i].textContent: ", a[i].textContent);
           list_of_html_values.push(a[i].textContent);
 
-          total_keys_path2 = total_keys_path + a.length + '_' + a[i].localName + ' ';
+          total_keys_path2 = total_keys_path2 + a.length + '_' + a[i].localName + ' ';
                
           // go down into the object another level
           await get_one_loop(a[i]);
