@@ -73,7 +73,7 @@ async function test_case2_hierarchical_html_elements() {
      rowcol =  ['nav', 'ul'];
      desc_arr1 = ['level0_root', 'level1_root'];
      var element = await get_element();
-     const root1 = ReactDOM.createRoot(document.getElementById('JSX_root1'));
+     const root1 = ReactDOM.createRoot(divElement1);
      root1.render(element);
 }
      
