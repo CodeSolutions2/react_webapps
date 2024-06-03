@@ -52,6 +52,7 @@ async function create_node_element_list() {
      console.log("list_of_html_values: ", list_of_html_values);
 
      console.log("total_keys_path: ", total_keys_path);
+     console.log("total_keys_path2: ", total_keys_path2);
      console.log("total_c_path: ", total_c_path);
 
      //  Index guides for where to assign levels
@@ -69,8 +70,8 @@ async function create_node_element_list() {
      let flag = "run";
 
      
-     let regex = /[\s]/g;
-     const isEmpty = (num) => {let val = num.replace(regex,""); val.length == 0}; 
+     // let regex = /[\s]/g;
+     // const isEmpty = (num) => {let val = num.replace(regex,""); val.length == 0}; 
 
      // I come into the loop with total_c_path_arr
      // total_c_path_arr = ["1_children", "2_children", "0_children", "3_children", "0_children", "0_children", "0_children", ""]
@@ -114,7 +115,7 @@ async function create_node_element_list() {
                // Way 1
                let total_c_path_arr_notEmpty = [];
                for (let j=0; j<total_c_path_arr.length; j++) {
-                    if (total_c_path_arr[j].replace(regex,"").length != 0) {
+                    if (total_c_path_arr[j].replace(/[\s]/g,"").length != 0) {
                          total_c_path_arr_notEmpty.push(total_c_path_arr[j]);
                     }
                }
@@ -127,8 +128,7 @@ async function create_node_element_list() {
                total_c_path = total_c_path_arr.join("");
      
                // Remove two or more consectutive spaces, and replace with one space, from string
-               let regex = /\s+/g;
-               total_c_path.replace(regex, " ");
+               total_c_path.replace(/\s+/g, " ");
 
           }
           
