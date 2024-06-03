@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+
+<div id="JSX_root"></div>
+     
+<button id="react_basics0" onclick="react_basics0()">React.js in JavaScript</button>
+     
+<script src="https://unpkg.com/react/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+
+<script>
+
+var list_of_html_keys = [];
+var list_of_html_values = [];
+     
+var desc_arr = ['root', 'main', 'main', 'sub', 'sub', 'sub'];
+var desc_arr1_all = ['level0_root', 'level1', 'level1_root', 'level2', 'level2', 'level2']
+
+// Make this array from desc_arr and list_of_html_keys
+var rowcol_all = ['nav', 'h1', 'ul', 'li', 'li', 'li'];
+
+// Could modify rowcol such that it only has items without root->main, and main->sub 
+var rowcol =  ['nav', 'ul']; // these are root (root->main) and main_root (main->sub)
+
+var desc_arr1 = ['level0_root', 'level1_root'];
+
+
+
+async function react_basics0() {
+   const htmlString = `<nav>
+         <h1>Exploring navbar using React in JavaScript</h1>
+           <ul><li>Item 0</li>
+                 <li>Item 1</li>
+                  <li>Item 2</li>
+                 </ul></nav>`;
+     const fragment = document.createRange().createContextualFragment(htmlString);
+     console.log("fragment: ", fragment);
+
+     // loop from the root down each tree
+     let a = fragment.children;
+
+     await get_one_loop(a);
+
+     console.log("list_of_html_keys: ", list_of_html_keys);
+     console.log("list_of_html_values: ", list_of_html_values);
+
+     // Correct first list_of_html_values value
+     // list_of_html_values[0] = "";
+
+     // What list_of_html_keys should be
+     // But need to see if it is possible to render the values using this recursive string method
+     // list_of_html_keys.push('li');
+     list_of_html_keys = ["nav", "h1", "ul", "li", "li", "li"];
+     list_of_html_values = ["", "Exploring navbar using React in JavaScript", "", "Item 0", "Item 1", "Item 2"];
+
+
+     var element = await get_element();
+
+     await render_ReactElement_to_DOM(element);
+}
+
+
+
+async function render_ReactElement_to_DOM(element) {
+     
+     const container = document.getElementById('JSX_root');
+     const root = ReactDOM.createRoot(container);
+     root.render(element);
+}
+
+     
+</script>
+
+</body>
+</html>
