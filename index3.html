@@ -20,7 +20,6 @@ var list_of_html_values = [];
 // make list_of_html_values = "" if it is a root
 
 // To do : needs to be created from Part 1 output 
-var levels = ['level0_root', 'level1', 'level1_root', 'level2', 'level2', 'level2']; // this is desc_arr1_all
 var desc_arr1_all = [];
      
 var rowcol =  ['nav', 'ul'];
@@ -50,146 +49,28 @@ async function create_node_element_list() {
      
      console.log("list_of_html_keys: ", list_of_html_keys);
      console.log("list_of_html_values: ", list_of_html_values);
-
-     console.log("total_keys_path: ", total_keys_path);
      console.log("total_keys_path2: ", total_keys_path2);
-     console.log("total_c_path: ", total_c_path);
 
-     //  Index guides for where to assign levels
-     let total_c_path_arr = total_c_path.split(' ');
-
-     // Initialize 
-     desc_arr1_all = total_c_path_arr;
-     
-     // ------------------------------------
-     // Go from lowest_level to highest_level
      // ------------------------------------
      
-     // calculate the number of levels: each _children needs to be in an array separately
-     let i = 0;
-     let flag = "run";
-
      
-     // let regex = /[\s]/g;
-     // const isEmpty = (num) => {let val = num.replace(regex,""); val.length == 0}; 
+     // ------------------------------------
 
-     // I come into the loop with total_c_path_arr
-     // total_c_path_arr = ["1_children", "2_children", "0_children", "3_children", "0_children", "0_children", "0_children", ""]
 
-     // AND
-
-     // total_c_path = "1_children 2_children 0_children 3_children 0_children 0_children 0_children"
-     // this string will change - when I find an element I remove it from the string
-     
-     // total_c_path = [total_c_path];
-     
-     var search_marker_arr = ['0_children'];
-     
-     while (flag == "run" && i < 4) {
-
-          for (let k=0; k<search_marker_arr.length; k++) {
-               
-               // ------------------------------------
-               
-               // [0] Assign levels for current tree elements
-               // var desc_arr1_all = ['level0_root', 'level1', 'level1_root', 'level2', 'level2', 'level2'];
-               for (let j=0; j<desc_arr1_all.length; j++) {
-                    if (desc_arr1_all[j] == search_marker_arr[k]) {
-                         desc_arr1_all[j] = `level${i}`
-                    }
-               }
-               console.log("desc_arr1_all: ", desc_arr1_all);
-     
-               // ------------------------------------
-               
-               // [1] Remove the assigned level from the string list
-               total_c_path_arr = total_c_path.split(search_marker_arr[k]); 
-               console.log("Split on marker - total_c_path_arr: ", total_c_path_arr);
-
-               // ------------------------------------
-               
-               // Remove empty elements in the array
-               // Way 0
-               // total_c_path_arr = total_c_path_arr.filter(isEmpty);
-               
-               // Way 1
-               let total_c_path_arr_notEmpty = [];
-               for (let j=0; j<total_c_path_arr.length; j++) {
-                    if (total_c_path_arr[j].replace(/[\s]/g,"").length != 0) {
-                         total_c_path_arr_notEmpty.push(total_c_path_arr[j]);
-                    }
-               }
-               total_c_path_arr = total_c_path_arr_notEmpty;
-               console.log("Remove empty fields - total_c_path_arr: ", total_c_path_arr);
-               
-               // ------------------------------------
-     
-               // Put the string back together without the current level
-               total_c_path = total_c_path_arr.join("");
-     
-               // Remove two or more consectutive spaces, and replace with one space, from string
-               total_c_path.replace(/\s+/g, " ");
-
-          }
-          
-          
-          // ------------------------------------
-
-          // Determine if a higher level should be assigned (do another loop): if children repeat 2 or more create a higher level
-          // see how many times children repeat per element
-          for (let j=0; j<total_c_path_arr.length; j++) {
-               let iterator = [...total_c_path_arr[j].matchAll(/children/g)];
-
-               let count = Array.from(iterator);
-
-               // Reassign the assignment search_marker: based on how many children were found
-               // If one 'children' found the field is the next assignment search_marker
-               if (count < 2) {
-                    search_marker_arr.push(total_c_path_arr[j]);
-               } else {
-                    // find the 'num_children' at the end of each total_c_path_arr[j] string
-                    search_marker_arr.push(total_c_path_arr[j].split(' ').pop());
-               }
-               
-          }
-          // search_marker_arr = ["3_children", "2_children"]
-          console.log("search_marker_arr: ", search_marker_arr);
-
-          // ------------------------------------
-          
-          if (search_marker_arr.length == 0) {
-               flag == 'stop';
-          } else {
-               i += 1;
-          }
-
-          
-     }
-     console.log("flag: ", flag);
-     
+     // ------------------------------------
 }
+
+     
      
 // -------------------------------------------
 
-var total_keys_path = "";
 var total_keys_path2 = "";
-var total_c_path = "";
      
 async function get_one_loop(a) {
      
      a = a.children;
 
      console.log("a.length: ", a.length);
-     
-     if (a.length == undefined || a.length == null) {
-          total_keys_path = total_keys_path + 0 + '_none ';
-     } else if (a.length == 0) {
-          total_keys_path = total_keys_path + a.length + '_none ';
-     } else {
-          total_keys_path = total_keys_path + a.length + '_' + a[0].localName + ' ';  // gives nav, h1, li
-     }
-     
-     total_c_path = total_c_path + a.length + '_children ';
      
      for (let i=0; i< a.length; i++) {
           console.log("i: ", i);
@@ -200,7 +81,7 @@ async function get_one_loop(a) {
           console.log("a[i].textContent: ", a[i].textContent);
           list_of_html_values.push(a[i].textContent);
 
-          total_keys_path2 = total_keys_path2 + a.length + '_' + a[i].localName + ' ';
+          total_keys_path2 = total_keys_path2 + a.length + ' ' + a[i].localName + '_';
                
           // go down into the object another level
           await get_one_loop(a[i]);
