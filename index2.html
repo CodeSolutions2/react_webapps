@@ -82,8 +82,10 @@ async function test_case3_hierarchical_html_elements() {
      desc_arr1 = ['level0_root', 'level1_root'];
 
      var divElement1 = document.createElement('div');
+     document.body.appendChild(divElement1);
      var element = await get_element();
-     ReactDOM.createRoot(divElement1).render(element);
+     const root1 = ReactDOM.createRoot(divElement1);
+     root1.render(element);
 }
 
 // -------------------------------------------
