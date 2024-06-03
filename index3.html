@@ -15,15 +15,9 @@
 var list_of_html_keys = [];
 var list_of_html_values = [];
 
-
-     
-// make list_of_html_values = "" if it is a root
-
-// To do : needs to be created from Part 1 output 
 var desc_arr1_all = [];
-     
-var rowcol =  ['nav', 'ul'];
-var desc_arr1 = ['level0_root', 'level1_root'];
+var rowcol =  [];
+var desc_arr1 = [];
 
 
 // -------------------------------------------
@@ -54,14 +48,21 @@ async function create_node_element_list() {
      // ------------------------------------
 
      let num_html = total_keys_path2.split(' ');
-console.log("num_html: ", num_html);
-     // for (let i=0; i < num_html.length; i++) {
-
-     //      if (i)
-    //  }
+     console.log("num_html: ", num_html);
+     
      
      // ------------------------------------
+     
+     let regex = '/root/g';
+     for (let i=0; i < list_of_html_values.length; i++) {
 
+          if (regex.test(desc_arr1_all[i]) == true) {
+               // a root is present
+               list_of_html_values[i] = "";
+               rowcol.push(list_of_html_keys[i]);
+               desc_arr1.push(desc_arr1_all[i]);
+          }
+     }
 
      // ------------------------------------
 }
