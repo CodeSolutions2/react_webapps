@@ -35,7 +35,7 @@ async function render_node_element_list() {
 async function get_element() {
 
      var element = desc_arr1.map((row, i) => { 
-          return React.createElement(`${rowcol[i]}`, {className: `${rowcol[i]}`, key: `${rowcol[i]}_keyName${i}` }, get_create_element1(row)) })
+          return React.createElement(`${rowcol[i]}`, {className: `${rowcol[i]}`, key: `${rowcol[i]}_keyName${i}` }, get_create_element(row)) })
      
      console.log("element: ", element);
      
@@ -44,7 +44,7 @@ async function get_element() {
 
 // -------------------------------------------
 
-function get_create_element1(row) {
+function get_create_element(row) {
 
      // row => ['level0_root', 'level1_root'];
      var start_root_name = row;
@@ -91,13 +91,6 @@ async function render_ReactElement_to_DOM(element) {
 }
      
 // -------------------------------------------
-
-
-
-
-
-
-     
 
      
 </script>
