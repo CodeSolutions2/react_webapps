@@ -3,10 +3,6 @@
 <head></head>
 <body>
 
-<div id="JSX_root"></div>
-     
-<button id="render_node_element_list" onclick="render_node_element_list()">render_node_element_list</button>
-<br><br>
 <button id="create_node_element_list" onclick="create_node_element_list()">create_node_element_list</button>
      
 <script src="https://unpkg.com/react/umd/react.development.js"></script>
@@ -16,10 +12,19 @@
 
 // -------------------------------------------
      
-// Step 0
 var list_of_html_keys = [];
 var list_of_html_values = [];
 
+
+     
+// make list_of_html_values = "" if it is a root
+
+// To do : needs to be created from Part 1 output 
+var levels = ['level0_root', 'level1', 'level1_root', 'level2', 'level2', 'level2']; // this is desc_arr1_all
+var desc_arr1_all = [];
+     
+var rowcol =  ['nav', 'ul'];
+var desc_arr1 = ['level0_root', 'level1_root'];
 
 
 // -------------------------------------------
@@ -41,7 +46,7 @@ async function create_node_element_list() {
      let a = fragment;  // new version
 
      // new version
-     await get_one_loop1(a);
+     await get_one_loop(a);
      
      console.log("list_of_html_keys: ", list_of_html_keys);
      console.log("list_of_html_values: ", list_of_html_values);
@@ -95,32 +100,26 @@ async function create_node_element_list() {
                console.log("desc_arr1_all: ", desc_arr1_all);
      
                // ------------------------------------
-
-
-               // for (let m=0; m<total_c_path.length; m++){
-                    // [1] Remove the assigned level from the string list
-              //       total_c_path_arr = total_c_path[m].split(search_marker_arr[k]); 
-              //       console.log("total_c_path_arr: ", total_c_path_arr);
-              //  }
-
                
                // [1] Remove the assigned level from the string list
                total_c_path_arr = total_c_path.split(search_marker_arr[k]); 
-               console.log("total_c_path_arr: ", total_c_path_arr);
-               
+               console.log("Split on marker - total_c_path_arr: ", total_c_path_arr);
+
+               // ------------------------------------
                
                // Remove empty elements in the array
                // Way 0
-               total_c_path_arr = total_c_path_arr.filter(isEmpty);
-               console.log("total_c_path_arr: ", total_c_path_arr);
+               // total_c_path_arr = total_c_path_arr.filter(isEmpty);
                
                // Way 1
-               //let total_c_path_arr_notEmpty = [];
-               //for (let j=0; j<total_c_path_arr.length; j++) {
-               //     if (total_c_path_arr[j].replace(regex,"").length != 0) {
-               //          total_c_path_arr_notEmpty.push(total_c_path_arr[j]);
-                //    }
-              // }
+               let total_c_path_arr_notEmpty = [];
+               for (let j=0; j<total_c_path_arr.length; j++) {
+                    if (total_c_path_arr[j].replace(regex,"").length != 0) {
+                         total_c_path_arr_notEmpty.push(total_c_path_arr[j]);
+                    }
+               }
+               total_c_path_arr = total_c_path_arr_notEmpty;
+               console.log("Remove empty fields - total_c_path_arr: ", total_c_path_arr);
                
                // ------------------------------------
      
@@ -130,7 +129,6 @@ async function create_node_element_list() {
                // Remove two or more consectutive spaces, and replace with one space, from string
                let regex = /\s+/g;
                total_c_path.replace(regex, " ");
-
 
           }
           
@@ -172,142 +170,47 @@ async function create_node_element_list() {
      console.log("flag: ", flag);
      
 }
-
-     
-// make list_of_html_values = "" if it is a root
-
-// To do : needs to be created from Part 1 output 
-var levels = ['level0_root', 'level1', 'level1_root', 'level2', 'level2', 'level2']; // this is desc_arr1_all
-var desc_arr1_all = [];
-     
-var rowcol =  ['nav', 'ul'];
-var desc_arr1 = ['level0_root', 'level1_root'];
-
-
      
 // -------------------------------------------
 
 var total_keys_path = "";
+var total_keys_path2 = "";
 var total_c_path = "";
-var levels = [];
      
-async function get_one_loop1(a) {
+async function get_one_loop(a) {
      
      a = a.children;
 
      console.log("a.length: ", a.length);
      
-     // if (a.length == undefined || a.length == null) {
-     //      total_keys_path = total_keys_path + 0 + '_none ';
-     // } else if (a.length == 0) {
-     //      total_keys_path = total_keys_path + a.length + '_none ';
-     // } else {
-     //      total_keys_path = total_keys_path + a.length + '_' + a[0].localName + ' ';  // gives nav, h1, li
-     // }
+     if (a.length == undefined || a.length == null) {
+          total_keys_path = total_keys_path + 0 + '_none ';
+     } else if (a.length == 0) {
+          total_keys_path = total_keys_path + a.length + '_none ';
+     } else {
+          total_keys_path = total_keys_path + a.length + '_' + a[0].localName + ' ';  // gives nav, h1, li
+     }
      
      total_c_path = total_c_path + a.length + '_children ';
      
      for (let i=0; i< a.length; i++) {
+          console.log("i: ", i);
+          
           console.log("a[i].localName: ", a[i].localName);
           list_of_html_keys.push(a[i].localName); // or tagName
           
           console.log("a[i].textContent: ", a[i].textContent);
           list_of_html_values.push(a[i].textContent);
 
-          if (i == 0) {
-               total_keys_path = total_keys_path + a.length + '_' + a[i].localName + ' ';
-          }
+          total_keys_path2 = total_keys_path + a.length + '_' + a[i].localName + ' ';
                
           // go down into the object another level
-          await get_one_loop1(a[i]);
+          await get_one_loop(a[i]);
      }
 }
 
 // -------------------------------------------
 
-
-
-
-
-     
-
-// -------------------------------------------
-// Step 2
-// -------------------------------------------
-async function render_node_element_list() {   
-     
-     var element = await get_element();
-     await render_ReactElement_to_DOM(element);
-}
-
-// -------------------------------------------
-
-async function get_element() {
-
-     var element = desc_arr1.map((row, i) => { 
-          return React.createElement(`${rowcol[i]}`, {className: `${rowcol[i]}`, key: `${rowcol[i]}_keyName${i}` }, get_create_element1(row)) })
-     
-     console.log("element: ", element);
-     
-     return element;
-}
-
-// -------------------------------------------
-
-function get_create_element1(row) {
-
-     // row => ['level0_root', 'level1_root'];
-     var start_root_name = row;
-     
-     // start_root
-     // find the index of row in list_of_html_keys
-     var start_ind = levels.indexOf(start_root_name) + 1;   // 1
-     console.log("start_ind: ", start_ind);
-     
-     // end_root: find the next root
-     var end_shortlist_ind = desc_arr1.indexOf(start_root_name) + 1;  // 1
-     console.log("end_shortlist_ind: ", end_shortlist_ind);
-     
-     var end_root_name = desc_arr1[end_shortlist_ind];   // level1_root
-     console.log("end_root_name: ", end_root_name);
-
-     // Value if not at the end of the node list
-     var end_ind = levels.indexOf(end_root_name);
-     
-     // If at the end of the node list, re-assign end_ind (end_root_name will be undefined)
-     if (end_root_name == null || end_root_name == undefined) {
-          end_ind = levels.length;
-     }
-     console.log("end_ind: ", end_ind);
-
-     var array1 = list_of_html_keys.slice(start_ind, end_ind);
-     console.log("array1: ", array1);  // 'h1'
-     
-     var list_of_html_values_short = list_of_html_values.slice(start_ind, end_ind);
-     console.log("list_of_html_values_short: ", list_of_html_values_short);
-     
-     // return the items between start_root and end_root
-     return array1.map((row, i) => { 
-          return React.createElement(`${row}`, {className: `${row}`, key: `${row}_keyName${i}` }, list_of_html_values_short[i]) })
-}
-
-// -------------------------------------------
-
-async function render_ReactElement_to_DOM(element) {
-     
-     const container = document.getElementById('JSX_root');
-     const root = ReactDOM.createRoot(container);
-     root.render(element);
-}
-     
-// -------------------------------------------
-
-
-
-
-
-
-     
 
      
 </script>
