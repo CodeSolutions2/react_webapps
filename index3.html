@@ -61,7 +61,8 @@ async function test_case1_hierarchical_html_elements() {
      // const [count, setCount] = React.useState(0);
      
      const htmlString = `<div>
-       <h1>Button clicks: ${count}</h1>
+            <h1>Button clicks</h1>
+       <p>${count}</p>
        </div>`;
 
      await create_node_element_list(htmlString);
