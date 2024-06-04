@@ -68,7 +68,7 @@ async function test_case1_hierarchical_html_elements() {
      element = await create_node_element_list(htmlString)
          .then(async function() { return await get_element();   })
 
-    console.log("element: ", element);
+     console.log("element: ", element);
 
      root.render(element);
 }
@@ -79,6 +79,18 @@ async function test_case1_hierarchical_html_elements() {
 // -------------------------------------------
 // Step 0
 // -------------------------------------------
+async function reset_html_lists() {
+ 
+     var list_of_html_keys = [];
+     var list_of_html_values = [];
+     var desc_arr1_all = [];
+     var rowcol =  [];
+     var desc_arr1 = [];
+
+     var total_keys_path2 = "";
+
+}
+
 async function create_node_element_list(htmlString) {
      
      const fragment = document.createRange().createContextualFragment(htmlString);
@@ -87,6 +99,8 @@ async function create_node_element_list(htmlString) {
      // loop from the root down each tree
      let a = fragment;  // new version
 
+     await reset_html_lists();
+ 
      // new version
      await get_one_loop(a);
      
@@ -205,8 +219,6 @@ async function assign_desc_arr1_all(num_html) {
 
      
 // -------------------------------------------
-
-var total_keys_path2 = "";
      
 async function get_one_loop(a) {
      
