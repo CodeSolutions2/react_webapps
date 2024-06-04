@@ -21,7 +21,6 @@ var root = ReactDOM.createRoot(container);
      
 // -------------------------------------------
 
-var element = "";
 var list_of_html_keys = [];
 var list_of_html_values = [];
 var desc_arr1_all = [];
@@ -68,12 +67,10 @@ async function test_case1_hierarchical_html_elements() {
 
      await create_node_element_list(htmlString);
 
-     if (element.length > 0) {
-          root.unmount();
-          root = ReactDOM.createRoot(container);
-     }
+     var element = await get_element();
 
-     element = await get_element();
+  console.log("element: ", element);
+ 
      root.render(element);
 }
 
