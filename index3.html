@@ -99,7 +99,7 @@ async function create_node_element_list() {
                     console.log("regexp result : ", row.split(' ').pop().replace(/[\s]/g, ''));
                     
                     if ((ind < nested_str.length-1) && (row.split(' ').pop().replace(/[\s]/g, '') == list_of_html_keys[i])) {
-                         str_val += str_val + "_root";
+                         str_val += "_root";
                     }
 
                     // OR 
