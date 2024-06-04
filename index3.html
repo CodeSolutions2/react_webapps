@@ -65,12 +65,11 @@ async function test_case1_hierarchical_html_elements() {
        <p>${count}</p>
        </div>`;
 
-     await create_node_element_list(htmlString);
+     element = await create_node_element_list(htmlString)
+         .then(async function() { return await get_element();   })
 
-     var element = await get_element();
+    console.log("element: ", element);
 
-  console.log("element: ", element);
- 
      root.render(element);
 }
 
@@ -240,11 +239,8 @@ async function get_one_loop(a) {
 // -------------------------------------------
      
 async function get_element() {
-
-     var element = desc_arr1.map((row, i) => { 
-          return React.createElement(`${rowcol[i]}`, {className: `${rowcol[i]}`, key: `${rowcol[i]}_keyName${i}` }, get_create_element(row)) })
-     
-     return element;
+     return desc_arr1.map((row, i) => { 
+          return React.createElement(`${rowcol[i]}`, {className: `${rowcol[i]}`, key: `${rowcol[i]}_keyName${i}` }, get_create_element(row)) });
 }
 
 // -------------------------------------------
