@@ -68,13 +68,36 @@ async function create_node_element_list() {
      // ------------------------------------
      
      // assign desc_arr1_all
-     await assign_desc_arr1_all(num_html3);
-     
+     let nested_str = await assign_desc_arr1_all(num_html3);
+     console.log("nested_str: ", nested_str);
+     // nested_str = [ "1 nav", "2 h1 2 ul", "3 li 3 li 3 li" ]
      
      // ------------------------------------
 
-     // Concatenate values of accum_val, so each value is a string
-     
+     // Use nested_str as a location template to assign strings
+     let i = 0;
+     while (i < list_of_html_keys.length) {
+
+          let regexp = new RegExp(`${list_of_html_keys[i]}`, 'g');
+
+          nested_str.map((row, ind) => {
+               if (regexp.test(row) == true) {
+                    let str_val = `level${ind}`;
+
+                    // Determine if root or not
+                    if (ind+1 < nested_str.length) {
+                         // At least one of the html elements is a root
+                         // does the last string equal the html element
+                         if (regexp.test(row.split(' ').pop()) == true) {
+                              str_val += str_val + "_root";
+                         }
+                    }
+               }
+          });
+          desc_arr_all.push(str_val);
+          i += 1;
+     }
+     console.log("desc_arr_all: ", desc_arr_all);
   
      // ------------------------------------
 
@@ -99,9 +122,6 @@ async function assign_desc_arr1_all(num_html) {
      console.log('num_html.length: ', num_html.length);
      
      // Created a nested 
-     // let accum_arr = [];
-     // let nested_arr = [];
-
      let accum_str = [];
      let nested_str = [];
      
@@ -113,29 +133,20 @@ async function assign_desc_arr1_all(num_html) {
           console.log('Number(num_html[i]): ', Number(num_html[i]));
           console.log('Number(num_html[i+2]): ', Number(num_html[i+2]));
 
-          // accum_arr.push(num_html.slice(i,i+2));
-          // console.log('accum_arr: ', accum_arr);
-
           accum_str.push(num_html.slice(i,i+2).join(' '));
           console.log('accum_str: ', accum_str);
           
           // Trigger when to store - if the next number value is not the same, store accumulated values
           if ((Number(num_html[i]) != Number(num_html[i+2])) || (i == num_html.length-2)) {
-               // nested_arr.push(accum_arr);
-
                nested_str.push(accum_str.join(' '));
 
                // Reset
-               // accum_arr = [];
                accum_str = [];
           }
 
           i = i + 2;
      }
-     // console.log("nested_arr: ", nested_arr);
-     // nested_vec = [[1, nav], [2, h1, 2, ul], [3, li, 3, li, 3, li]]
-
-     console.log("nested_str: ", nested_str);
+     return nested_str;
 }
 
      
