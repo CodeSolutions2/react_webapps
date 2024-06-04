@@ -53,13 +53,15 @@ async function create_node_element_list() {
      // ------------------------------------
 
      // Remove empty fields
-     // const NonEmptyVals_toKeep = (x) => x.length != 0;
-     // num_html = num_html.filter(NonEmptyVals_toKeep);
-     // console.log("num_html: ", num_html);
-     
-     let num_html1 = num_html.map((x) => { if (x.length != 0) { x } });
-     // let num_html1 = num_html.map((x) => { x.length });
+     let num_html1 = num_html.map((x) => { if (x.length != 0) { return x } });
      console.log("num_html1: ", num_html1);
+     
+     let num_html2 = num_html.map((x) => { return x.length });
+     console.log("num_html2: ", num_html2);
+
+     const NonEmptyVals_toKeep = (x) => x.length != 0;
+     let num_html3 = num_html.filter(NonEmptyVals_toKeep);
+     console.log("num_html3: ", num_html3);
      
      // ------------------------------------
      
