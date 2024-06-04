@@ -16,8 +16,7 @@
 
 // -------------------------------------------
 
-const container = document.getElementById('JSX_root');
-const root = ReactDOM.createRoot(container);
+ const container = document.getElementById('JSX_root');
      
 // -------------------------------------------
      
@@ -68,6 +67,9 @@ async function test_case1_hierarchical_html_elements() {
      await create_node_element_list(htmlString);
      
      var element = await get_element();
+ 
+     
+     const root = ReactDOM.createRoot(container);
      root.render(element);
 }
 
