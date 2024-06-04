@@ -53,8 +53,8 @@ async function create_node_element_list() {
      // ------------------------------------
 
      // Remove empty fields
-     // const isEmpty = (num) => num.length == 0;
-     // num_html = num_html.filter(isEmpty);
+     // const NonEmptyVals_toKeep = (x) => x.length != 0;
+     // num_html = num_html.filter(NonEmptyVals_toKeep);
      // console.log("num_html: ", num_html);
      
      let num_html1 = num_html.map((x) => { if (x.length != 0) { x } });
@@ -64,7 +64,34 @@ async function create_node_element_list() {
      // ------------------------------------
      
      // assign desc_arr1_all
+     // await assign_desc_arr1_all(num_html);
      
+     
+     // ------------------------------------
+
+     // Concatenate values of accum_val, so each value is a string
+     
+  
+     // ------------------------------------
+
+     // assign rowcol and desc_arr1
+     // let regex = '/root/g';
+     // for (let i=0; i < list_of_html_values.length; i++) {
+
+     //      if (regex.test(desc_arr1_all[i]) == true) {
+               // a root is present
+    //            list_of_html_values[i] = "";
+    //            rowcol.push(list_of_html_keys[i]);
+    //            desc_arr1.push(desc_arr1_all[i]);
+    //       }
+     // }
+
+     // ------------------------------------
+}
+
+
+async function assign_desc_arr1_all(num_html) {
+
      // Created a nested 
      let accum_val = [];
      let nested_vec = [];
@@ -105,29 +132,8 @@ async function create_node_element_list() {
      console.log("nested_vec: ", nested_vec);
      // nested_vec = [[1, nav], [2, h1, 2, ul], [3, li, 3, li, 3, li]]
      
-     // ------------------------------------
-
-     // Concatenate values of accum_val, so each value is a string
-     // let 
-  
-     // ------------------------------------
-
-     // assign rowcol and desc_arr1
-     // let regex = '/root/g';
-     // for (let i=0; i < list_of_html_values.length; i++) {
-
-     //      if (regex.test(desc_arr1_all[i]) == true) {
-               // a root is present
-    //            list_of_html_values[i] = "";
-    //            rowcol.push(list_of_html_keys[i]);
-    //            desc_arr1.push(desc_arr1_all[i]);
-    //       }
-     // }
-
-     // ------------------------------------
 }
 
-     
      
 // -------------------------------------------
 
