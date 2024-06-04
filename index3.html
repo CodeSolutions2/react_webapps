@@ -102,7 +102,9 @@ async function assign_desc_arr1_all(num_html) {
      let accum_val = [];
      let nested_vec = [];
 
-     for (let i=0; i< num_html.length-2; i+2) {
+     
+     // for (let i=0; i< num_html.length-2; i+2) {
+     for (let i=0; i< 4; i+2) {
 
           console.log('i: ', i);
           
@@ -117,11 +119,11 @@ async function assign_desc_arr1_all(num_html) {
                console.log('accum_val: ', accum_val);
                
                // more complex: flatten the accum_val     
-               let flat1 = accum_val[0];
-               for (let i=0; i<accum_val.length-2; i+2) {
-                    flat1 = flat1.concat(accum_val[i+1])
-               }
-               console.log("flat1: ", flat1);
+               // let flat1 = accum_val[0];
+               // for (let i=0; i<accum_val.length-2; i+2) {
+               //      flat1 = flat1.concat(accum_val[i+1])
+               // }
+               // console.log("flat1: ", flat1);
 
                // Store the flattened array
                // nested_vec.push(flat1);
