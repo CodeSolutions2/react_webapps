@@ -6,7 +6,9 @@
  <div id="JSX_root"></div>
 
 <button id="test_case0_hierarchical_html_elements" onclick="test_case0_hierarchical_html_elements()">One root, one header in hierarchical order</button>
+<button id="test_case0_hierarchical_html_elements" onclick="test_case1_hierarchical_html_elements()">useState example</button>
 
+ 
 <script src="https://unpkg.com/react/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
 
@@ -25,6 +27,8 @@ var desc_arr1_all = [];
 var rowcol =  [];
 var desc_arr1 = [];
 
+// -------------------------------------------
+
 async function test_case0_hierarchical_html_elements() {   
 
      const htmlString = `<nav>
@@ -40,7 +44,31 @@ async function test_case0_hierarchical_html_elements() {
      root.render(element);
 }
 
+// -------------------------------------------
+
+async function test_case1_hierarchical_html_elements() {   
+
+ // Initialize a count=0
+  const [count, setCount] = React.useState(0);
+ setCount(count+1);
+
+ 
+ // function add() {
+ //  setCount(count+1);
+ // }
+
+ // function subtract() {
+ //  setCount(count-1);
+ // }
+     const htmlString = `<h1>Button clicks: ${count}</h1>`;
+
+     await create_node_element_list(htmlString);
      
+     var element = await get_element();
+     root.render(element);
+}
+
+ 
 
 
 // -------------------------------------------
