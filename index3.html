@@ -99,40 +99,40 @@ async function assign_desc_arr1_all(num_html) {
      console.log('num_html.length: ', num_html.length);
      
      // Created a nested 
-     let accum_arr = [];
-     let nested_arr = [];
+     // let accum_arr = [];
+     // let nested_arr = [];
 
      let accum_str = [];
      let nested_str = [];
      
      let i = 0;
-     while (i < num_html.length-2) {
+     while (i < num_html.length) {
 
           console.log('i: ', i);
           
           console.log('Number(num_html[i]): ', Number(num_html[i]));
           console.log('Number(num_html[i+2]): ', Number(num_html[i+2]));
 
-          accum_arr.push(num_html.slice(i,i+2));
-          console.log('accum_arr: ', accum_arr);
+          // accum_arr.push(num_html.slice(i,i+2));
+          // console.log('accum_arr: ', accum_arr);
 
           accum_str.push(num_html.slice(i,i+2).join(' '));
           console.log('accum_str: ', accum_str);
           
           // Trigger when to store - if the next number value is not the same, store accumulated values
-          if (Number(num_html[i]) != Number(num_html[i+2])) {
-               nested_arr.push(accum_arr);
+          if ((Number(num_html[i]) != Number(num_html[i+2])) || (i == num_html.length-2)) {
+               // nested_arr.push(accum_arr);
 
                nested_str.push(accum_str.join(' '));
 
                // Reset
-               accum_arr = [];
+               // accum_arr = [];
                accum_str = [];
           }
 
           i = i + 2;
      }
-     console.log("nested_arr: ", nested_arr);
+     // console.log("nested_arr: ", nested_arr);
      // nested_vec = [[1, nav], [2, h1, 2, ul], [3, li, 3, li, 3, li]]
 
      console.log("nested_str: ", nested_str);
