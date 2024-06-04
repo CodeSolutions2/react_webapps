@@ -72,7 +72,7 @@ async function create_node_element_list() {
                // flatten the accum_val
 
                // test 0:
-               const flat0 = (arr) => [].concat.apply([], arr.map((a) => (Array.isArray(a) ? flat(a) : a)))
+               const flat0 = (accum_val) => [].concat.apply([], accum_val.map((a) => (Array.isArray(a) ? flat(a) : a)))
                console.log("flat0: ", flat0);
                
                let flat1 = accum_val[0];
