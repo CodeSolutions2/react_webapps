@@ -89,19 +89,30 @@ async function create_node_element_list() {
                     console.log("row: ", row);
                     str_val = `level${ind}`;
 
+                    // Determine if root or not and if the last nested_str value = list_of_html_keys[i]
+                    let val = row.split(' ').pop();
+                    console.log("val: ", val);
+                    // console.log("regexp.test(val): ", regexp.test(val));
+                    console.log("regexp result : ", row.split(' ').pop().replace(/[\s]/g, ''));
+                    
+                    if (ind < nested_str.length && (row.split(' ').pop().replace(/[\s]/g, '') == list_of_html_keys[i])) {
+                         str_val += str_val + "_root";
+                    }
+
+                    // OR 
+                    
                     // Determine if root or not
-                    if (ind < nested_str.length) {
+                    // if (ind < nested_str.length) {
                          // At least one of the html elements is a root
                          // does the last string equal the html element
-                         let val = row.split(' ').pop();
-                         console.log("val: ", val);
-
-                         console.log("regexp.test(val): ", regexp.test(val));
+                   //      let val = row.split(' ').pop();
+                   //       console.log("val: ", val);
+                    //      console.log("regexp.test(val): ", regexp.test(val));
                          
-                         if (regexp.test(val) == true) {
-                              str_val += str_val + "_root";
-                         }
-                    }
+                   //       if (regexp.test(val) == true) {
+                    //           str_val += str_val + "_root";
+                   //       }
+                   //  }
                }
           });
           console.log("str_val: ", str_val);
