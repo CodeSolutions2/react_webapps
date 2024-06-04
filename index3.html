@@ -81,19 +81,29 @@ async function create_node_element_list() {
 
           let regexp = new RegExp(`${list_of_html_keys[i]}`, 'g');
 
+          console.log("list_of_html_keys[i]: ", list_of_html_keys[i]);
+
           nested_str.map((row, ind) => {
                if (regexp.test(row) == true) {
+                    
+                    console.log("row: ", row);
                     str_val = `level${ind}`;
 
+                    console.log("row: ", row);
+
                     // Determine if root or not
-                    if (ind+1 < nested_str.length) {
+                    if (ind < nested_str.length) {
                          // At least one of the html elements is a root
                          // does the last string equal the html element
-                         if (regexp.test(row.split(' ').pop()) == true) {
+                         let val = row.split(' ').pop();
+                         console.log("val: ", val);
+                         
+                         if (regexp.test(val) == true) {
                               str_val += str_val + "_root";
                          }
                     }
                }
+               console.log("str_val: ", str_val);
           });
           desc_arr1_all.push(str_val);
 
