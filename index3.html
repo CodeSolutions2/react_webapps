@@ -21,12 +21,12 @@ var root = ReactDOM.createRoot(container);
      
 // -------------------------------------------
 
-// var list_of_html_keys = [];
-// var list_of_html_values = [];
-// var desc_arr1_all = [];
-// var rowcol =  [];
-// var desc_arr1 = [];
-// var total_keys_path2 = "";
+var list_of_html_keys = [];
+var list_of_html_values = [];
+var desc_arr1_all = [];
+var rowcol =  [];
+var desc_arr1 = [];
+var total_keys_path2 = "";
 
 // -------------------------------------------
 
@@ -82,12 +82,12 @@ async function test_case1_hierarchical_html_elements() {
 // -------------------------------------------
 async function reset_html_lists() {
  
-     var list_of_html_keys = [];
-     var list_of_html_values = [];
-     var desc_arr1_all = [];
-     var rowcol =  [];
-     var desc_arr1 = [];
-     var total_keys_path2 = "";
+     list_of_html_keys = [];
+     list_of_html_values = [];
+     desc_arr1_all = [];
+     rowcol =  [];
+     desc_arr1 = [];
+     total_keys_path2 = "";
 
 }
 
@@ -262,7 +262,6 @@ function get_create_element(row) {
      var start_root_name = row;
      
      // start_root
-     // find the index of row in list_of_html_keys
      var start_ind = desc_arr1_all.indexOf(start_root_name) + 1;
      // console.log("start_ind: ", start_ind);
      
