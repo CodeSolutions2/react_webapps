@@ -57,7 +57,8 @@ async function create_node_element_list() {
      num_html = num_html.filter(isEmpty);
      console.log("num_html: ", num_html);
      
-     let num_html1 = num_html.map((x) => { if (x.length != 0) { x } })
+     // let num_html1 = num_html.map((x) => { if (x.length != 0) { x } });
+     let num_html1 = num_html.map((x) => { x.length });
      console.log("num_html1: ", num_html1);
      
      // ------------------------------------
