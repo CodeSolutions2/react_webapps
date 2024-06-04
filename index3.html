@@ -49,42 +49,59 @@ async function create_node_element_list() {
 
      let num_html = total_keys_path2.split(' ');
      console.log("num_html: ", num_html);
-  // [1, nav, 2, h1, 2, ul, 3, li, 3, li, 3, li]
+     // [1, nav, 2, h1, 2, ul, 3, li, 3, li, 3, li]
      
      
      // ------------------------------------
+     
+     // assign desc_arr1_all
+     
+     // Created a nested 
+     let accum_val = [];
+     let nested_vec = [];
 
-    // assign desc_arr1_all
+     for (let i=0; i< num_html.length-2; i++) {
+          
+          // Another idea: need to find every even value and store at the end of an even value, but does not trigger at which even value to store
+          // if (i%2 == true && i != 0 ) {
+               // i is even
+               
+          // Trigger when to store - if the next number value is not the same, store accumulated values
+          if (Number(num_html[i]) != Number(num_html[i+2])) {
+               
+               // flatten the accum_val
 
-  // Created a nested 
-  let accum_val = [];
-  let nested_vec = [];
+               // test 0:
+               const flat0 = (arr) => [].concat.apply([], arr.map((a) => (Array.isArray(a) ? flat(a) : a)))
+               console.log("flat0: ", flat0);
+               
+               let flat1 = accum_val[0];
+               for (let i=0; i<accum_val.length-2; i+2) {
+                    flat1 = flat1.concat(accum_val[i+1])
+               }
+               console.log("flat1: ", flat1);
 
-  for (let i=0; i< num_html.length-2; i++) {
-     // Another idea: need to find every even value and store at the end of an even value, but does not trigger at which even value to store
-    if (i%2 == true && i != 0 ) {
+               // Store the flattened array
+               // nested_vec.push(flat1);
+               // OR
+               nested_vec.push(accum_val);
 
-      // Trigger when to store - if the next number value 
-      if (Number(num_html[i]) != i+2) {
-         // i is even
-  
-         // flatten the accum_val
-  
-         // test 0:
-         const flat0 = (arr) => [].concat.apply([], arr.map((a) => (Array.isArray(a) ? flat(a) : a)))
-         console.log("flat0: ", flat0);
-  
-         
-        let flat1 = accum_val[0];
-         for (let i=0; i<accum_val.length-1; i+2) {
-            flat1 = flat1.concat(accum_val[i+1])
-         }
-         console.log("flat1: ", flat1);
-
-       // save
-      }
+               // Reset
+               accum_val = [];
+          } else {
+               accum_val.push(num_html[i])
+          }
+               
+          // }
+          
      }
-  }
+     console.log("nested_vec: ", nested_vec);
+     // nested_vec = [[1, nav], [2, h1, 2, ul], [3, li, 3, li, 3, li]]
+     
+     // ------------------------------------
+
+     // Concatenate values of accum_val, so each value is a string
+     // let 
   
      // ------------------------------------
 
