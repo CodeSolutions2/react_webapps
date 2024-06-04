@@ -48,15 +48,17 @@ async function create_node_element_list() {
      // ------------------------------------
 
      let num_html = total_keys_path2.split(' ');
-
+     console.log("num_html: ", num_html);
+     
      // ------------------------------------
 
      // Remove empty fields
      const isEmpty = (num) => num.length == 0;
      num_html = num_html.filter(isEmpty);
-     
      console.log("num_html: ", num_html);
-     // [1, nav, 2, h1, 2, ul, 3, li, 3, li, 3, li]
+     
+     let num_html1 = num_html.map((x) => { if (x.length != 0) { x } })
+     console.log("num_html1: ", num_html1);
      
      // ------------------------------------
      
