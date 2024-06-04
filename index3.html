@@ -69,7 +69,7 @@ async function test_case1_hierarchical_html_elements() {
      await create_node_element_list(htmlString);
 
      if (element.length > 0) {
-          ReactDOM.unmountComponentAtNode(root);
+          root.unmount();
           root = ReactDOM.createRoot(container);
      }
 
