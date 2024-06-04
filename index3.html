@@ -81,7 +81,7 @@ async function create_node_element_list() {
 
           let regexp = new RegExp(`${list_of_html_keys[i]}`, 'g');
 
-          console.log("list_of_html_keys[i]: ", list_of_html_keys[i]);
+          // console.log("list_of_html_keys[i]: ", list_of_html_keys[i]);
 
            // Reset
           str_val = "";
@@ -89,36 +89,20 @@ async function create_node_element_list() {
           nested_str.map((row, ind) => {
                if (regexp.test(row) == true) {
                     
-                    console.log("row: ", row);
                     str_val = `level${ind}`;
 
                     // Determine if root or not and if the last nested_str value = list_of_html_keys[i]
                     let val = row.split(' ').pop();
-                    console.log("val: ", val);
+                    // console.log("val: ", val);
                     // console.log("regexp.test(val): ", regexp.test(val));
-                    console.log("regexp result : ", row.split(' ').pop().replace(/[\s]/g, ''));
+                    // console.log("regexp result : ", row.split(' ').pop().replace(/[\s]/g, ''));
                     
                     if ((ind < nested_str.length-1) && (row.split(' ').pop().replace(/[\s]/g, '') == list_of_html_keys[i])) {
                          str_val += "_root";
                     }
-
-                    // OR 
-                    
-                    // Determine if root or not
-                    // if (ind < nested_str.length) {
-                         // At least one of the html elements is a root
-                         // does the last string equal the html element
-                   //      let val = row.split(' ').pop();
-                   //       console.log("val: ", val);
-                    //      console.log("regexp.test(val): ", regexp.test(val));
-                         
-                   //       if (regexp.test(val) == true) {
-                    //           str_val += str_val + "_root";
-                   //       }
-                   //  }
                }
           });
-          console.log("str_val: ", str_val);
+          // console.log("str_val: ", str_val);
           desc_arr1_all.push(str_val);
 
           i += 1;
@@ -128,8 +112,10 @@ async function create_node_element_list() {
      // ------------------------------------
 
      // assign rowcol and desc_arr1
-     let regex = '/root/g';
+     let regex = /root/g;
      for (let i=0; i < list_of_html_values.length; i++) {
+
+          console.log("desc_arr1_all[i]: ", desc_arr1_all[i]);
           
           if (regex.test(desc_arr1_all[i]) == true) {
                // a root is present
