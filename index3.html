@@ -48,9 +48,15 @@ async function create_node_element_list() {
      // ------------------------------------
 
      let num_html = total_keys_path2.split(' ');
+
+     // ------------------------------------
+
+     // Remove empty fields
+     const isEmpty = (num) => num.length == 0;
+     num_html = num_html.filter(isEmpty);
+     
      console.log("num_html: ", num_html);
      // [1, nav, 2, h1, 2, ul, 3, li, 3, li, 3, li]
-     
      
      // ------------------------------------
      
@@ -60,21 +66,21 @@ async function create_node_element_list() {
      let accum_val = [];
      let nested_vec = [];
 
-     for (let i=0; i< num_html.length-2; i++) {
+     for (let i=0; i< num_html.length-2; i+2) {
+
+          console.log('i: ', i);
           
-          // Another idea: need to find every even value and store at the end of an even value, but does not trigger at which even value to store
-          // if (i%2 == true && i != 0 ) {
-               // i is even
-               
+          console.log('Number(num_html[i]): ', Number(num_html[i]));
+          console.log('Number(num_html[i+2]): ', Number(num_html[i+2]));
+          
           // Trigger when to store - if the next number value is not the same, store accumulated values
           if (Number(num_html[i]) != Number(num_html[i+2])) {
+     
+               // start simple: accum_val
+               accum_val.push(num_html.slice(i,i+2));
+               console.log('accum_val: ', accum_val);
                
-               // flatten the accum_val
-
-               // test 0:
-               const flat0 = (accum_val) => [].concat.apply([], accum_val.map((a) => (Array.isArray(a) ? flat(a) : a)))
-               console.log("flat0: ", flat0);
-               
+               // more complex: flatten the accum_val     
                let flat1 = accum_val[0];
                for (let i=0; i<accum_val.length-2; i+2) {
                     flat1 = flat1.concat(accum_val[i+1])
@@ -89,10 +95,8 @@ async function create_node_element_list() {
                // Reset
                accum_val = [];
           } else {
-               accum_val.push(num_html[i])
+               accum_val.push(num_html.slice(i,i+2))
           }
-               
-          // }
           
      }
      console.log("nested_vec: ", nested_vec);
@@ -106,16 +110,16 @@ async function create_node_element_list() {
      // ------------------------------------
 
      // assign rowcol and desc_arr1
-     let regex = '/root/g';
-     for (let i=0; i < list_of_html_values.length; i++) {
+     // let regex = '/root/g';
+     // for (let i=0; i < list_of_html_values.length; i++) {
 
-          if (regex.test(desc_arr1_all[i]) == true) {
+     //      if (regex.test(desc_arr1_all[i]) == true) {
                // a root is present
-               list_of_html_values[i] = "";
-               rowcol.push(list_of_html_keys[i]);
-               desc_arr1.push(desc_arr1_all[i]);
-          }
-     }
+    //            list_of_html_values[i] = "";
+    //            rowcol.push(list_of_html_keys[i]);
+    //            desc_arr1.push(desc_arr1_all[i]);
+    //       }
+     // }
 
      // ------------------------------------
 }
