@@ -132,8 +132,6 @@ async function create_node_element_list() {
 
 
 async function assign_desc_arr1_all(num_html) {
-
-     console.log('num_html.length: ', num_html.length);
      
      // Created a nested 
      let accum_str = [];
@@ -141,14 +139,7 @@ async function assign_desc_arr1_all(num_html) {
      
      let i = 0;
      while (i < num_html.length) {
-
-          console.log('i: ', i);
-          
-          console.log('Number(num_html[i]): ', Number(num_html[i]));
-          console.log('Number(num_html[i+2]): ', Number(num_html[i+2]));
-
           accum_str.push(num_html.slice(i,i+2).join(' '));
-          console.log('accum_str: ', accum_str);
           
           // Trigger when to store - if the next number value is not the same, store accumulated values
           if ((Number(num_html[i]) != Number(num_html[i+2])) || (i == num_html.length-2)) {
