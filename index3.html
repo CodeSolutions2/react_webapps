@@ -83,6 +83,9 @@ async function create_node_element_list() {
 
           console.log("list_of_html_keys[i]: ", list_of_html_keys[i]);
 
+           // Reset
+          str_val = "";
+          
           nested_str.map((row, ind) => {
                if (regexp.test(row) == true) {
                     
@@ -95,7 +98,7 @@ async function create_node_element_list() {
                     // console.log("regexp.test(val): ", regexp.test(val));
                     console.log("regexp result : ", row.split(' ').pop().replace(/[\s]/g, ''));
                     
-                    if (ind < nested_str.length && (row.split(' ').pop().replace(/[\s]/g, '') == list_of_html_keys[i])) {
+                    if ((ind < nested_str.length-1) && (row.split(' ').pop().replace(/[\s]/g, '') == list_of_html_keys[i])) {
                          str_val += str_val + "_root";
                     }
 
@@ -118,8 +121,6 @@ async function create_node_element_list() {
           console.log("str_val: ", str_val);
           desc_arr1_all.push(str_val);
 
-          // Reset
-          str_val = "";
           i += 1;
      }
      console.log("desc_arr1_all: ", desc_arr1_all);
