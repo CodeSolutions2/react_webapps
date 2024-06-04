@@ -46,16 +46,19 @@ async function test_case0_hierarchical_html_elements() {
 
 // -------------------------------------------
 
+var count = 0;
+ 
 document.getElementById('test_case1_hierarchical_html_elements').addEventListener("click", previewInput, false);
 
 function previewInput(event) {
-     setCount(count+1);
+     //setCount(count+1);
+     count += 1;
 }
  
 async function test_case1_hierarchical_html_elements() {
  
      // Initialize a count=0
-     const [count, setCount] = React.useState(0);
+     [count, setCount] = React.useState(0);
      
      const htmlString = `<h1>Button clicks: ${count}</h1>`;
 
