@@ -53,20 +53,22 @@ async function create_node_element_list() {
      // ------------------------------------
 
      // Remove empty fields
-     let num_html1 = num_html.map((x) => { if (x.length != 0) { return x } });
-     console.log("num_html1: ", num_html1);
+     // let num_html1 = num_html.map((x) => { if (x.length != 0) { return x } });
+     // console.log("num_html1: ", num_html1);
+     // note to self that the field is not removed  ["1", "nav", "2", "h1", "2", "ul", "3", "li", "3", "li", "3", "li", undefined]
      
-     let num_html2 = num_html.map((x) => { return x.length });
-     console.log("num_html2: ", num_html2);
+     // let num_html2 = num_html.map((x) => { return x.length });
+     // console.log("num_html2: ", num_html2);
 
      const NonEmptyVals_toKeep = (x) => x.length != 0;
      let num_html3 = num_html.filter(NonEmptyVals_toKeep);
      console.log("num_html3: ", num_html3);
+     // OK ["1", "nav", "2", "h1", "2", "ul", "3", "li", "3", "li", "3", "li"]
      
      // ------------------------------------
      
      // assign desc_arr1_all
-     // await assign_desc_arr1_all(num_html);
+     await assign_desc_arr1_all(num_html3);
      
      
      // ------------------------------------
@@ -94,6 +96,8 @@ async function create_node_element_list() {
 
 async function assign_desc_arr1_all(num_html) {
 
+     console.log('num_html.length: ', num_html.length);
+     
      // Created a nested 
      let accum_val = [];
      let nested_vec = [];
