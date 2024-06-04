@@ -19,7 +19,8 @@
  const container = document.getElementById('JSX_root');
      
 // -------------------------------------------
-     
+
+var element = "";
 var list_of_html_keys = [];
 var list_of_html_values = [];
 var desc_arr1_all = [];
@@ -65,10 +66,13 @@ async function test_case1_hierarchical_html_elements() {
        </div>`;
 
      await create_node_element_list(htmlString);
-     
-     var element = await get_element();
+
+     if (element.length > 0) {
+          ReactDOM.unmountComponentAtNode(root);
+     }
+
+     element = await get_element();
  
-     
      const root = ReactDOM.createRoot(container);
      root.render(element);
 }
