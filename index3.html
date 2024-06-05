@@ -228,7 +228,7 @@ async function create_node_element_list(htmlString) {
       let to_cor_nums = nums.slice(1, nums.length);
       console.log("to_cor_nums: ", to_cor_nums);
 
-      let end = to_cor_nums.map((row, ind) => { return row-(diff-1); });
+      let end = to_cor_nums.map((row, ind) => { let val = row-(diff-1); return val.toString(); });
       console.log("end: ", end);
   
       nums = nums[0].concat(end);
