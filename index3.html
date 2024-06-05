@@ -231,7 +231,7 @@ async function create_node_element_list(htmlString) {
       let end = to_cor_nums.map((row, ind) => { return row-(diff-1); });
       console.log("end: ", end);
   
-      nums = to_cor_nums[0].concat(end);
+      nums = nums[0].concat(end);
       console.log("nums: ", nums);
 
       desc_arr1_all = desc_arr1_all.map((row, ind) => { return row.replace(/[0-9]/g, nums.at(ind)); });
