@@ -122,7 +122,7 @@ async function reset_html_lists() {
 async function create_node_element_list(htmlString) {
      
      const fragment = document.createRange().createContextualFragment(htmlString);
-     console.log("fragment: ", fragment);
+     // console.log("fragment: ", fragment);
 
      // loop from the root down each tree
      let a = fragment;  // new version
@@ -132,14 +132,14 @@ async function create_node_element_list(htmlString) {
      // new version
      await get_one_loop(a);
      
-     console.log("list_of_html_keys: ", list_of_html_keys);
-     console.log("list_of_html_values: ", list_of_html_values);
-     console.log("total_keys_path2: ", total_keys_path2);
+     // console.log("list_of_html_keys: ", list_of_html_keys);
+     // console.log("list_of_html_values: ", list_of_html_values);
+     // console.log("total_keys_path2: ", total_keys_path2);
 
      // ------------------------------------
 
      let num_html = total_keys_path2.split(' ');
-     console.log("num_html: ", num_html);
+     // console.log("num_html: ", num_html);
      
      // ------------------------------------
 
@@ -153,14 +153,14 @@ async function create_node_element_list(htmlString) {
 
      const NonEmptyVals_toKeep = (x) => x.length != 0;
      let num_html3 = num_html.filter(NonEmptyVals_toKeep);
-     console.log("num_html3: ", num_html3);
+     // console.log("num_html3: ", num_html3);
      // OK ["1", "nav", "2", "h1", "2", "ul", "3", "li", "3", "li", "3", "li"]
      
      // ------------------------------------
      
      // assign desc_arr1_all
      let nested_str = await assign_desc_arr1_all(num_html3);
-     console.log("nested_str: ", nested_str);
+     // console.log("nested_str: ", nested_str);
      // nested_str = [ "1 nav", "2 h1 2 ul", "3 li 3 li 3 li" ]
      
      // ------------------------------------
@@ -198,36 +198,36 @@ async function create_node_element_list(htmlString) {
 
           i += 1;
      }
-     console.log("desc_arr1_all: ", desc_arr1_all);
+     // console.log("desc_arr1_all: ", desc_arr1_all);
   
      // ------------------------------------
 
      // Ensure that level numbers are in seqential order, instead of by [number of children]
 
       var nums = desc_arr1_all.map((row, ind) => { return row.match(/[0-9]/g); });
-      console.log("nums: ", nums);
+      // console.log("nums: ", nums);
   
       let sorted_nums = nums.sort((a, b) => a - b);
-      console.log("sorted_nums: ", sorted_nums);
+      // console.log("sorted_nums: ", sorted_nums);
   
       let b = sorted_nums.slice(0,2);
-      console.log("b: ", b);
+      // console.log("b: ", b);
   
       let diff = b.reduce((prev, cur) => { return cur-prev; });
-      console.log("diff: ", diff);
+      // console.log("diff: ", diff);
 
       // shift the array values after the first field
       let to_cor_nums = nums.slice(1, nums.length);
-      console.log("to_cor_nums: ", to_cor_nums);
+      // console.log("to_cor_nums: ", to_cor_nums);
 
       let end = to_cor_nums.map((row, ind) => { let val = row-(diff-1); return val.toString(); });
-      console.log("end: ", end);
+      // console.log("end: ", end);
   
       nums = nums[0].concat(end);
-      console.log("nums: ", nums);
+      // console.log("nums: ", nums);
 
       desc_arr1_all = desc_arr1_all.map((row, ind) => { return row.replace(/[0-9]/g, nums.at(ind)); });
-      console.log("desc_arr1_all: ", desc_arr1_all);
+      // console.log("desc_arr1_all: ", desc_arr1_all);
      
      // ------------------------------------
 
@@ -235,7 +235,7 @@ async function create_node_element_list(htmlString) {
      let regex = /root/g;
      for (let i=0; i < list_of_html_values.length; i++) {
 
-          console.log("desc_arr1_all[i]: ", desc_arr1_all[i]);
+          // console.log("desc_arr1_all[i]: ", desc_arr1_all[i]);
           
           if (regex.test(desc_arr1_all[i]) == true) {
                // a root is present
@@ -244,8 +244,8 @@ async function create_node_element_list(htmlString) {
                desc_arr1.push(desc_arr1_all[i]);
           }
      }
-     console.log("rowcol: ", rowcol);
-     console.log("desc_arr1: ", desc_arr1);
+     // console.log("rowcol: ", rowcol);
+     // console.log("desc_arr1: ", desc_arr1);
 
      // ------------------------------------
 }
@@ -281,15 +281,15 @@ async function get_one_loop(a) {
      
      a = a.children;
 
-     console.log("a.length: ", a.length);
+     // console.log("a.length: ", a.length);
      
      for (let i=0; i< a.length; i++) {
-          console.log("i: ", i);
+          // console.log("i: ", i);
           
-          console.log("a[i].localName: ", a[i].localName);
+          // console.log("a[i].localName: ", a[i].localName);
           list_of_html_keys.push(a[i].localName); // or tagName
           
-          console.log("a[i].textContent: ", a[i].textContent);
+          // console.log("a[i].textContent: ", a[i].textContent);
           list_of_html_values.push(a[i].textContent);
 
           total_keys_path2 = total_keys_path2 + a.length + ' ' + a[i].localName + ' ';
